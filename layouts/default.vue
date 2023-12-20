@@ -1,6 +1,8 @@
 <template>
-	<TheHeader />
-	<slot />
+	<div>
+		<TheHeader />
+		<slot />
+	</div>
 </template>
 
 <script setup>
@@ -8,6 +10,8 @@
 	import { ScrollTrigger } from "gsap/ScrollTrigger";
 	import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 	gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+	// import LocomotiveScroll from 'locomotive-scroll';
+	// const locomotiveScroll = new LocomotiveScroll();
 </script>
 
 <style scoped></style>
