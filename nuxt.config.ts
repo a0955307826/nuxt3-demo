@@ -10,9 +10,10 @@ export default defineNuxtConfig({
 	// 		}
 	// 	]
 	// }
-	css: [ '~/assets/css/index.css' ],
+	css: [ '~/assets/scss/index.scss' ],
 	modules: [
 		'@nuxtjs/tailwindcss',
+		'@pinia/nuxt',
 		// '@vueuse/nuxt',
 	],
 	build: {

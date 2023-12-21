@@ -1,9 +1,11 @@
 <script lang="ts" setup></script>
 
 <template>
-  <div class="h-[500vh]">
-    <Home />
+  <div class="h-[1000vh] bg-[lightyellow]">
+    <!-- <Home /> -->
   </div>
 </template>
 
-<style scoped></style>
+<style>
+
+</style>
