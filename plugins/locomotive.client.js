@@ -5,6 +5,8 @@ export default defineNuxtPlugin(() => {
 
 	function onScroll({ scroll, limit, velocity, direction, progress }) {
 		store.scrollPosition = scroll;
+		window.direction = direction;
+		window.progress = progress;
 	}
 
 	const locomotiveScroll = new LocomotiveScroll({
@@ -12,7 +14,7 @@ export default defineNuxtPlugin(() => {
 		lenisOptions: {
 			wrapper: window,
 			content: document.documentElement,
-			lerp: 0.3,
+			lerp: 0.03,
 		},
 	});
 })

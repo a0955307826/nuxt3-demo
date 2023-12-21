@@ -14,9 +14,9 @@
 </script>
 
 <style lang="scss">
-	html, body {
-		&::-webkit-scrollbar {
-			display: none;
-		}
-	}
+	// html, body {
+	// 	&::-webkit-scrollbar {
+	// 		display: none;
+	// 	}
+	// }
 </style>
