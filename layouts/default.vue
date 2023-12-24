@@ -1,7 +1,7 @@
 <template>
 	<TheHeader />
 	<slot />
-	<ScrollStyle />
+	<!-- <ScrollStyle /> -->
 </template>
 
 <script setup>
@@ -14,9 +14,5 @@
 </script>
 
 <style lang="scss">
-	html, body {
-		&::-webkit-scrollbar {
-			display: none;
-		}
-	}
+
 </style>

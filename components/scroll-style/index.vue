@@ -13,11 +13,14 @@ const scrollbarThumbEl = ref(null);
 const scrollbar = ref(null);
 const scrollbar_h = ref(0);
 const isMouseDown = ref(false);
-let y = 0;
+const lastY = ref(0);
+const newScrollY = ref(0);
+const limit = ref(0);
+const speed = ref(0);
 
 const mouseDownEvent = (event) => {
-	y = event.clientY;
 	isMouseDown.value = true;
+	lastY.value = event.clientY;
 	// let percent = event.clientY / window.innerHeight;
 	// console.log(document.body.scrollHeight * percent);
 	// console.log(window.innerHeight / document.body.scrollHeight * percent * 1000);
@@ -31,12 +34,23 @@ const mouseUpEvent = () => {
 const mousemoveEvent = (event) => {
 	event.preventDefault();
 	if(isMouseDown.value) {
-		let limit = document.body.scrollHeight - window.innerHeight;
-		let deltaY = event.clientY - y;
-		console.log(limit);
-		// let 
-		// console.log();
-		// window.scrollTo({ top: 1009 });
+		// limit = document.body.scrollHeight - window.innerHeight;
+		// speed = window.innerHeight / document.body.clientHeight;
+
+		// newScrollY += -lastY + (event.clientY);
+		// if(store.scrollPosition <= 50) {
+		// 	newScrollY = Math.max(newScrollY, 0);
+		// } 
+		// if(store.scrollPosition >= limit - 50) {
+		// 	newScrollY = Math.min(newScrollY, limit / speed);
+		// }
+
+		// let finalScroll = Math.max(Math.min(newScrollY * speed, limit), 0);
+		// window.scrollTo({top: finalScroll});
+		// let limit = document.body.scrollHeight - window.innerHeight;
+		// let deltaY = store.scrollPosition + event.clientY - newScrollY;
+		// console.log(store.scrollPosition);
+		// window.scrollTo({ top: deltaY });
 	}
 }
 
@@ -53,6 +67,7 @@ const removeDragEvents = () => {
 }
 
 watch( () => store.scrollPosition, (val) => { 
+		console.log(val);
 		// console.log((window.innerHeight / document.body.clientHeight));
         // let scrollPercentage = (scroll / (document.body.scrollHeight - height.value)) * 100;
         scrollbar.value.style.setProperty('--vh', `${((window.innerHeight) / (document.body.scrollHeight)) * val}px`);
@@ -88,11 +103,12 @@ onBeforeUnmount(() => {
 	right: 0;
 	top: 0;
     bottom: 0;
+	z-index: 1000;
 }
 .scrollbar_thumb {
     width: 12.5px;
 	height: var(--h);
-	position: absolute;
+	position: fixed;
 	right: 0;
 	z-index: 1000;
     transform: translateY(var(--vh));
