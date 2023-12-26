@@ -1,5 +1,5 @@
 <template>
-	<header class="the-header h-[50px] w-full bg-slate-400">
+	<header class="the-header fixed top-0 left-0 h-[50px] w-full">
 
 	</header>
 </template>

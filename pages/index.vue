@@ -1,11 +1,7 @@
-<script lang="ts" setup></script>
-
 <template>
-  <div class="h-[200vh] bg-[lightyellow]">
-    <!-- <Home /> -->
-  </div>
+    <Home />
 </template>
 
-<style>
+<script setup></script>
 
-</style>
+<style lang="scss" scoped></style>

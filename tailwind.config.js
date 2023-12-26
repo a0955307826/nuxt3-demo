@@ -1,8 +1,23 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require("tailwindcss/defaultTheme");
+const { screensTailwind: screens } = require("./vender/tailwind/screens.ts");
+
 module.exports = {
-	content: ["./src/**/*.{html,js}"],
+	content: [
+		"./components/**/*.{js,vue,ts}",
+		"./layouts/**/*.vue",
+		"./pages/**/*.vue",
+		"./plugins/**/*.{js,ts}",
+		"./nuxt.config.{js,ts}",
+		"./composables/**/*.{js,ts}",
+	],
 	theme: {
-		extend: {},
+		extend: {
+			screens,
+			fontFamily: {
+				'sans': ['"Proxima Nova"', ...defaultTheme.fontFamily.sans],
+			}
+		},
 	},
 	plugins: [],
 };
