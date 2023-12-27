@@ -1,7 +1,6 @@
 <template>
 	<section class="layout-home">
-		<Banner />
-		<div class="h-[100dvh] w-[100dvw]"></div>
+		
 	</section>
 </template>
 

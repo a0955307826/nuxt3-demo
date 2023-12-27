@@ -1,5 +1,7 @@
 <template>
-    <Home />
+    <Banner />
+    <div class="h-[90dvh]"></div>
+    <Intro />
 </template>
 
 <script setup></script>
