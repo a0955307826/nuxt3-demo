@@ -1,7 +1,6 @@
 <template>
 	<TheHeader />
 	<slot />
-	<!-- <ScrollStyle /> -->
 </template>
 
 <script setup>

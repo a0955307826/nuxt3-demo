@@ -1,7 +1,8 @@
 <template>
     <Banner />
-    <div class="h-[90dvh]"></div>
+    <div class="h-[80dvh]"></div>
     <Intro />
+    <Marquee />
 </template>
 
 <script setup></script>
