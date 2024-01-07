@@ -1,10 +1,17 @@
 <template>
-    <Banner />
-    <div class="h-[80dvh]"></div>
-    <Intro />
-    <Marquee />
+    <section class="layout-home">
+        <Banner />
+        <div class="h-[80dvh]"></div>
+        <Intro />
+        <Marquee />
+        <Flicking />
+    </section>
 </template>
 
-<script setup></script>
+<script setup>
 
-<style lang="scss" scoped></style>
+</script>
+
+<style lang="scss" scoped>
+
+</style>
