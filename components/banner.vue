@@ -56,22 +56,19 @@ onMounted(() => {
 		time1
 			.to(title, {
 				scale: 1,
-				duration: 1,
+				opacity: 1,
 			})
 			.to(title, {
 				scale: 2,
 				opacity: 0.8,
-				duration: 1,
+			})
+			.to(title, {
+				scale: 2.5,
+				opacity: 0.5,
 			})
 			.to(title, {
 				scale: 3,
-				opacity: 0.5,
-				duration: 1,
-			})
-			.to(title, {
-				scale: 4,
 				opacity: 0,
-				duration: 1,
 			});
 	}, hero.value);
 });
