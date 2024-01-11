@@ -26,7 +26,7 @@ const store = useGlobalStore();
 let time1;
 
 const go_to_intro = () => {
-	window.scrollTo({ top: store.getIntroHeight - 50, behavior: "smooth" });
+	window.scrollTo({ top: store.getIntroHeight - 100, behavior: "smooth" });
 }
 
 watchThrottled(
@@ -44,13 +44,14 @@ watchThrottled(
 onMounted(() => {
 	gsap.context((self) => {
 		const title = self.selector(".hero-banner-title");
+		const hero = self.selector(".hero");
 		time1 = gsap.timeline({
 			scrollTrigger: {
-				trigger: '.hero',
+				trigger: hero,
 				start: "10% center",
-				end: "72% center",
+				end: "55% center",
 				scrub: true,
-				// markers: true
+				markers: true
 			},
 		});
 		time1

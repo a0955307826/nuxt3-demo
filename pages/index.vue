@@ -3,7 +3,7 @@
         <Banner />
         <div class="h-[80dvh]"></div>
         <Intro />
-        <Marquee />
+        <!-- <Marquee /> -->
         <Flicking />
     </section>
 </template>
