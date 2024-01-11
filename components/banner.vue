@@ -4,11 +4,11 @@
 		<div class="hero-banner-title">HELLO WORLD</div>
 		<div 
 			@click="go_to_intro"
-			class="hero-scroll-down"
+			class="hero-scroll-down caret-transparent"
 			:class="{ 'opacity-0 pointer-events-none': store.scrollPosition >= 80 }"
 		>
 			<img 
-				class="md:w-[32px] w-[24px] md:h-[32px] h-[24px]" 
+				class="md:w-[32px] w-[24px] md:h-[32px] h-[24px] pointer-events-none" 
 				:class="{ 'opacity-0': store.scrollPosition >= 80 }"
 				src="/images/icon-arrow-down.svg" 
 				alt="icon-arrow-down"
@@ -51,7 +51,7 @@ onMounted(() => {
 				start: "10% center",
 				end: "55% center",
 				scrub: true,
-				markers: true
+				// markers: true
 			},
 		});
 		time1

@@ -38,21 +38,23 @@
 							class="card-panel"
 						>
 							<img 
+								width="480"
+								height="300"
 								class="w-full h-full object-cover pointer-events-none" 
 								:src="`https://picsum.photos/1920/1080?random=${i}`" 
 								alt=""
 							>
 						</div>
 					</Flicking>
-					<div class="flex gap-[12px] absolute right-0 bottom-[-100px] ">
-						<div 
-							class="w-[50px] h-[50px] rounded-full bg-black cursor-pointer"
+					<div class="flex gap-[12px] absolute right-0 bottom-[-100px]">
+						<span 
+							class="w-[50px] h-[50px] rounded-full bg-black caret-transparent cursor-pointer"
 							@click="prev_image">
-						</div>
-						<div 
-							@click="next_image" 
-							class="w-[50px] h-[50px] rounded-full bg-black cursor-pointer">
-						</div>
+						</span>
+						<span 
+							class="w-[50px] h-[50px] rounded-full bg-black caret-transparent cursor-pointer"
+							@click="next_image">
+						</span>
 					</div>
 				</div>
 			</div>
@@ -109,15 +111,15 @@
 	}
 }
 .image-animation {
-	animation: imageWidth .5s both;
+	animation: imageWidth .6s both .3s;
 }
 
 .text-animation {
-	animation: textMove .5s both .4s;
+	animation: textMove .5s both .6s;
 }
 
 .image-block {
-	animation: imageBlock .5s both;
+	animation: imageBlock .6s both;
 }
 
 .card-panel {
