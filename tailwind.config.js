@@ -15,9 +15,15 @@ module.exports = {
 		extend: {
 			screens,
 			fontFamily: {
-				'sans': ['"Proxima Nova"', ...defaultTheme.fontFamily.sans],
-			}
+				sans: ['"Proxima Nova"', ...defaultTheme.fontFamily.sans],
+			},
 		},
 	},
-	plugins: [],
+	corePlugins: {
+		aspectRatio: false,
+	},
+	plugins: [
+		require("@tailwindcss/aspect-ratio"),
+		// ...
+	],
 };

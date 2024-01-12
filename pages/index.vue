@@ -4,7 +4,7 @@
         <div class="h-[80dvh]"></div>
         <Intro />
         <Marquee />
-        <Flicking />
+        <Projects/>
     </section>
 </template>
 
