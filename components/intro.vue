@@ -36,7 +36,7 @@
 
 <style lang="scss" scoped>
 	.intro {
-		@apply relative md:max-w-[1200px] md:mx-auto md:px-10 px-4 md:mb-[80px] mb-10 flex md:flex-row flex-col-reverse justify-between gap-4 z-10;
+		@apply relative md:max-w-[1440px] md:mx-auto px-[40px] md:mb-[80px] mb-10 flex md:flex-row flex-col-reverse justify-between gap-4 z-10;
 	}
 	.intro-subtitle {
 		@apply flex items-center gap-2 md:mb-4 mb-2;

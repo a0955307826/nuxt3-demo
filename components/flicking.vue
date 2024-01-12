@@ -1,20 +1,20 @@
 <template>
-	<section class="relative w-full h-[100dvh] mb-[120px] overflow-hidden">
+	<section class="relative w-full h-[90dvh] mb-[120px] overflow-hidden">
 		<img 
 			v-for="i in image_list"
 			:key="`big-image-${i}`"
 			class="absolute h-full object-cover rounded-r-[32px]" 
 			:class="flickingIndex + 1 === i ? 'image-animation' : 'image-block'"
 			:src="`https://picsum.photos/1920/1080?random=${i}`" 
-			alt=""
+			alt="cover_image"
 		>
-		<div class="max-w-[1200px] h-full mx-auto">
-			<div class="w-full h-full gap-[40px] flex items-center">
+		<div class="max-w-[1440px] pl-10 mx-auto h-full">
+			<div class="w-full h-full gap-[80px] flex items-center">
 				<div 
 					v-for="i in image_list"
 					:key="`text-${i}`"
 					v-show="flickingIndex + 1 === i"
-					class="relative intro shrink-0 max-w-[600px] text-[#FFFFFF] pl-[40px] opacity-0"
+					class="relative intro max-w-[800px] text-[#FFFFFF] opacity-0"
 					:class="{ 'text-animation': flickingIndex + 1 === i }"
 				>
 					<div class="title font-bold leading-[50px] text-[68px] pb-6">{{ `title${i}` }}</div>
@@ -33,7 +33,7 @@
 						@will-change="flickingChange"
 					>
 						<div 
-							v-for="i in 10" 
+							v-for="i in 7" 
 							:key="i"
 							class="card-panel"
 						>
@@ -42,19 +42,33 @@
 								height="300"
 								class="w-full h-full object-cover pointer-events-none" 
 								:src="`https://picsum.photos/1920/1080?random=${i}`" 
-								alt=""
+								alt="flicking-image"
 							>
 						</div>
 					</Flicking>
-					<div class="flex gap-[12px] absolute right-0 bottom-[-100px]">
-						<span 
-							class="w-[50px] h-[50px] rounded-full bg-black caret-transparent cursor-pointer"
-							@click="prev_image">
-						</span>
-						<span 
-							class="w-[50px] h-[50px] rounded-full bg-black caret-transparent cursor-pointer"
-							@click="next_image">
-						</span>
+					<div class="w-full flex justify-between items-start absolute right-10 bottom-[-90px]">
+						<div class="title font-bold text-white leading-[50px] text-[50px] ml-20 pb-6">{{ `title${get_image_index}` }}</div>
+						<div class="flex gap-4">
+							<div 
+								class="w-[50px] h-[50px] rounded-full bg-black flex items-center justify-center caret-transparent cursor-pointer"
+								@click="prev_image"
+							>
+								<img 
+									class="rotate-[-180deg]"  
+									src="/images/arrow.svg" 
+									alt="icon-arrow"
+								>
+							</div>
+							<div 
+								class="w-[50px] h-[50px] rounded-full bg-black flex items-center justify-center caret-transparent cursor-pointer"
+								@click="next_image"
+							>
+								<img 
+									src="/images/arrow.svg" 
+									alt="icon-arrow"
+								>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -67,7 +81,14 @@
 	import "@egjs/vue3-flicking/dist/flicking.css";
 
 	const flickingIndex = ref(0);
-	const image_list = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+	const image_list = ref([1, 2, 3, 4, 5, 6, 7]);
+
+	const get_image_index = computed(() => {
+		if(image_list.value.length < flickingIndex.value + 2) {
+			return 1;
+		}
+		return flickingIndex.value + 2;
+	});
 
 	const flicking = ref();
 
@@ -111,11 +132,11 @@
 	}
 }
 .image-animation {
-	animation: imageWidth .6s both .3s;
+	animation: imageWidth .6s both .4s;
 }
 
 .text-animation {
-	animation: textMove .5s both .6s;
+	animation: textMove .5s both .7s;
 }
 
 .image-block {
