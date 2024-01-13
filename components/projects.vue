@@ -13,7 +13,7 @@
 			v-if="width >= 992"
 			class="max-w-[1440px] mx-auto h-full z-10"
 		>
-			<div class="w-full h-full gap-[80px] flex items-center">
+			<div class="w-full h-full gap-[80px] flex items-center pl-10">
 				<div 
 					v-for="i in image_list"
 					:key="`text-${i}`"
@@ -51,7 +51,11 @@
 						</div>
 					</Flicking>
 					<div class="w-full flex justify-between items-start absolute right-10 bottom-[-90px]">
-						<div class="title font-bold text-white leading-[50px] text-[50px] ml-20 pb-6">{{ `title${get_image_index}` }}</div>
+						<div 
+							class="title font-bold text-white leading-[50px] text-[50px] ml-20 pb-6"
+							:class="isTextOpacity ? 'opacity-0' : 'opacity-100'"
+							>{{ `title${get_image_index}` }}
+						</div>
 						<div class="flex gap-4">
 							<div 
 								class="w-[50px] h-[50px] rounded-full bg-black flex items-center justify-center caret-transparent cursor-pointer"
@@ -77,7 +81,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="w-full overflow-hidden" v-else>
+		<div 
+			v-else
+			class="w-full overflow-hidden">
 			<div 
 				v-for="i in image_list"
 				:key="`text-${i}`"
@@ -113,6 +119,27 @@
 					>
 				</div>
 			</Flicking>
+			<div class="flex justify-end mt-4 mr-4 gap-2">
+				<div 
+					class="w-[50px] h-[50px] rounded-full bg-black flex items-center justify-center caret-transparent cursor-pointer"
+					@click="prev_image"
+				>
+					<img 
+						class="rotate-[-180deg]"  
+						src="/images/arrow.svg" 
+						alt="icon-arrow"
+					>
+				</div>
+				<div 
+					class="w-[50px] h-[50px] rounded-full bg-black flex items-center justify-center caret-transparent cursor-pointer"
+					@click="next_image"
+				>
+					<img 
+						src="/images/arrow.svg" 
+						alt="icon-arrow"
+					>
+				</div>
+			</div>
 		</div>
 	</section>
 </template>
@@ -125,6 +152,8 @@
 
 	const flickingIndex = ref(0);
 	const image_list = ref([1, 2, 3, 4, 5, 6, 7]);
+	const isTextOpacity = ref(false);
+	const timeout = ref(0);
 
 	// element
 	const flicking = ref();
@@ -158,7 +187,14 @@
 	}
 
 	const flickingChange = (ele) => {
+		clearTimeout(timeout.value);
+
 		flickingIndex.value = ele.index;
+		isTextOpacity.value = true;
+
+		timeout.value = setTimeout(() => {
+			isTextOpacity.value = false;
+		}, 300);
 	}
 </script>
 
@@ -228,6 +264,6 @@
 }
 
 .card-panel {
-	@apply lg:max-w-[480px] max-w-[200px] w-full lg:max-h-[300px] max-h-[200px] h-full lg:rounded-[32px] mr-[20px] cursor-grab active:cursor-grabbing overflow-hidden;
+	@apply lg:max-w-[480px] max-w-[200px] w-full lg:max-h-[300px] max-h-[200px] h-full lg:rounded-[32px] lg:mr-5 mr-4 cursor-grab active:cursor-grabbing overflow-hidden;
 }
 </style>
