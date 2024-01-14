@@ -27,6 +27,6 @@
 .marquee-move {
     animation: move 8s linear infinite;
     width: max-content;
-    @apply flex items-center px-[10px] translate-x-0 shrink-0 text-[180px] text-[#E5E5E5] whitespace-nowrap leading-[170px];
+    @apply flex items-center px-[10px] translate-x-0 shrink-0 text-[180px] font-black text-[#E5E5E5] whitespace-nowrap leading-[170px];
 }
 </style>

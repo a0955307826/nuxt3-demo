@@ -1,7 +1,23 @@
 <template>
-	<section ref="hero" class="hero">
-		<div class="hero-banner"></div>
-		<div class="hero-banner-title">HELLO WORLD</div>
+	<section ref="hero" class="hero w-full h-[100dvh]">
+		<div class="hero-banner aspect-w-[1440] aspect-h-[900]">
+			<img 
+				width="1440"
+				height="900"
+				class="absolute w-full h-full object-cover" 
+				src="https://picsum.photos/1440/900?image=0" 
+				alt="cover_image"
+			>
+		</div>
+		<div 
+			class="hero-banner-title">
+			<div class="title1">I'm Ray,</div>
+			<div class="title2">a coder.</div>
+		</div>
+		<div class="hero-banner-title--move hidden">
+			<div>I'm Ray,</div>
+			<div>a coder.</div>
+		</div>
 		<div 
 			@click="go_to_intro"
 			class="hero-scroll-down caret-transparent"
@@ -23,33 +39,33 @@ import { useGlobalStore } from "~/store";
 import { watchThrottled } from "@vueuse/core";
 const hero = ref();
 const store = useGlobalStore();
+
 let time1;
+
+watchThrottled(
+	() => store.scrollPosition,
+	(val) => {
+		if (val >= 0) {
+            document.querySelector(".hero-banner-title").classList.add("hidden");
+			document.querySelector(".hero-banner-title--move").classList.remove("hidden");
+		} 
+	},
+	{ throttle: 500 }
+);
 
 const go_to_intro = () => {
 	window.scrollTo({ top: store.getIntroHeight - 100, behavior: "smooth" });
 }
 
-watchThrottled(
-	() => store.scrollPosition,
-	(val) => {
-		if (val >= 50) {
-            document.querySelector(".hero-banner-title").classList.add("hero-banner-title--animation");
-		} else {
-			document.querySelector(".hero-banner-title").classList.remove("hero-banner-title--animation");
-		}
-	},
-	{ throttle: 500 }
-);
-
 onMounted(() => {
 	gsap.context((self) => {
-		const title = self.selector(".hero-banner-title");
+		const title = self.selector(".hero-banner-title--move");
 		const hero = self.selector(".hero");
 		time1 = gsap.timeline({
 			scrollTrigger: {
 				trigger: hero,
 				start: "10% center",
-				end: "55% center",
+				end: "45% center",
 				scrub: true,
 				// markers: true
 			},
@@ -80,17 +96,6 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss" scoped>
-@keyframes rainbow {
-	0% {
-		background-position: left;
-	}
-	50% {
-		background-position: right;
-	}
-	100% {
-		background-position: left;
-	}
-}
 
 @keyframes scale-opacity {
 	0% {
@@ -102,22 +107,44 @@ onBeforeUnmount(() => {
 		opacity: 0;
 	}
 }
-.hero {
-	@apply relative w-full h-[100dvh] overflow-x-hidden;
-}
+
 .hero-banner {
-	@apply relative w-full h-full bg-cover bg-no-repeat bg-fixed bg-[url('https://picsum.photos/1440/900?image=0')];
+	@apply relative w-full h-full;
 }
 
-.hero-banner-title {
-	background: linear-gradient(to right, crimson, pink, springgreen);
-	background-size: 200% 200%;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	@apply fixed text-center left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:leading-none sm:leading-[80px] leading-[60px] lg:text-[120px] sm:text-[80px] text-[60px] lg:whitespace-nowrap pointer-events-none;
-	&--animation {
-		animation: rainbow 1s ease-in-out infinite;
+@keyframes textWidth {
+	0% {
+		width: 0;
 	}
+	100% {
+		width: 100%;
+	}
+}
+.hero-banner-title {
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 10;
+	text-shadow: 5px 5px #8DAA9D;
+	@apply absolute text-center text-white font-black lg:leading-[130px] sm:leading-[80px] leading-[60px] lg:text-[120px] sm:text-[80px] text-[60px] whitespace-nowrap;
+}
+
+.title1 {
+	overflow: hidden;
+	animation: textWidth 1s both steps(30) .5s;
+}
+
+.title2 {
+	overflow: hidden;
+	animation: textWidth 1s both steps(30) 1.5s;
+}
+
+.hero-banner-title--move {
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	text-shadow: 5px 5px #8DAA9D;
+	@apply fixed text-center text-white font-black lg:leading-[130px] sm:leading-[80px] leading-[60px] lg:text-[120px] sm:text-[80px] text-[60px] whitespace-nowrap;
 }
 
 .hero-scroll-down {

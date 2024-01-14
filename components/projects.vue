@@ -5,11 +5,11 @@
 			v-for="i in image_list"
 			:key="`big-image-${i}`"
 			class="absolute top-0 left-0 object-cover w-full lg:h-full h-[calc(100%-220px)] lg:rounded-r-[32px]" 
-			:class="flickingIndex + 1 === i ? set_image_animation : set_image_block_animation"
+			:class="flickingIndex + 1 === i ? image_animation : image_block_animation"
 			:src="`https://picsum.photos/1920/1080?random=${i}`" 
 			alt="cover_image"
 		>
-		<div 
+		<ClientOnly 
 			v-if="width >= 992"
 			class="max-w-[1440px] mx-auto h-full z-10"
 		>
@@ -80,8 +80,8 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div 
+		</ClientOnly>
+		<ClientOnly 
 			v-else
 			class="w-full overflow-hidden">
 			<div 
@@ -140,20 +140,22 @@
 					>
 				</div>
 			</div>
-		</div>
+		</ClientOnly>
 	</section>
 </template>
 
 <script setup>
 	import Flicking from "@egjs/vue3-flicking";
 	import "@egjs/vue3-flicking/dist/flicking.css";
-	import { useWindowSize } from '@vueuse/core';
+	import { useWindowSize, watchDebounced } from '@vueuse/core';
     const { width } = useWindowSize();
 
 	const flickingIndex = ref(0);
 	const image_list = ref([1, 2, 3, 4, 5, 6, 7]);
 	const isTextOpacity = ref(false);
 	const timeout = ref(0);
+	const image_animation = ref(0);
+	const image_block_animation = ref(0);
 
 	// element
 	const flicking = ref();
@@ -165,19 +167,19 @@
 		return flickingIndex.value + 2;
 	});
 
-	const set_image_animation = computed(() => {
+	const set_image_animation = () => {
 		if(width.value >= 992) {
-			return 'image-animation';
+			return image_animation.value = 'image-animation';
 		}
-		return 'image-animation-mobile'; 
-	})
+		return image_animation.value =  'image-animation-mobile'; 
+	};
 
-	const set_image_block_animation = computed(() => {
+	const set_image_block_animation = () => {
 		if(width.value >= 992) {
-			return 'image-block';
+			return image_block_animation.value = 'image-block';
 		}
-		return 'image-block-mobile'; 
-	});
+		return image_block_animation.value = 'image-block-mobile'; 
+	};
 
 	const prev_image = () => {
 		flicking.value.prev();
@@ -196,6 +198,20 @@
 			isTextOpacity.value = false;
 		}, 300);
 	}
+
+	watchDebounced(
+	width,
+		() => { 
+			set_image_animation();
+			set_image_block_animation();
+		},
+		{ debounce: 500, maxWait: 1000 },
+	)
+
+	onMounted(() => {
+		set_image_animation();
+		set_image_block_animation();
+	})
 </script>
 
 <style lang="scss" scoped>
