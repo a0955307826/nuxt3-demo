@@ -14,7 +14,7 @@ export default defineNuxtPlugin(() => {
 		lenisOptions: {
 			wrapper: window,
 			content: document.documentElement,
-			lerp: 0.3,
+			lerp: 0.2,
 		},
 	});
 })

@@ -1,13 +1,6 @@
 <template>
 	<section class="intro">
 		<div class="intro-left">
-			<div class="intro-subtitle">
-				<div class="intro-subtitle--icon"></div>
-				<div class="text-[20px]">subtitle</div>
-			</div>
-			<div class="intro-title">
-				<div class="text-[48px]">title</div>
-			</div>
 			<div class="intro-description lg:max-w-[580px]">
 				<p class="text-[16px]">{{ description }}</p>
 			</div>
@@ -27,8 +20,11 @@
 
 <script setup>
 	import { useGlobalStore } from '~/store';
+	import { useWindowSize, watchDebounced } from '@vueuse/core';
+	
+	const { width, height } = useWindowSize();
 	const store = useGlobalStore();
-	const description = ref("Lorem ipsum dolor sit amet, audire periculis efficiantur vix cu, ius dico omnesque maluisset ea. Sanctus accusata partiendo vim eu. Eu eum tation deseruisse, detraxit mediocritatem per at. Pri cu placerat fabellas disputando, in his magna populo fastidii. Adipisci consequat necessitatibus nec ex. Dictas omittam no vel, mel euismod molestie at.");
+	const description = ref("Lorem ipsum dolor sit amet, audire periculis efficiantur vix cu, ius dico omnesque maluisset ea. Sanctus accusata partiendo vim eu. Eu eum tation deseruisse, detraxit mediocritatem per at. Pri cu placerat fabellas disputando, in his magna populo fastidii. Adipisci consequat necessitatibus nec ex. Dictas omittam no vel, mel euismod molestie at.Lorem ipsum dolor sit amet, audire periculis efficiantur vix cu, ius dico omnesque maluisset ea. Sanctus accusata partiendo vim eu. Eu eum tation deseruisse, detraxit mediocritatem per at. Pri cu placerat fabellas disputando, in his magna populo fastidii. Adipisci consequat necessitatibus nec ex. Dictas omittam no vel, mel euismod molestie at.");
 	onMounted(() => {
 		store.getIntroHeight = document.querySelector('.intro').offsetTop;
 	})
@@ -36,7 +32,7 @@
 
 <style lang="scss" scoped>
 	.intro {
-		@apply relative md:max-w-[1440px] md:mx-auto lg:px-10 px-4 md:mb-[80px] mb-10 flex md:flex-row flex-col-reverse justify-between gap-4 z-10;
+		@apply relative md:max-w-[1440px] md:mx-auto lg:px-10 px-4 md:mb-[80px] mb-10 flex md:flex-row flex-col-reverse items-center justify-between gap-4 z-10;
 	}
 	.intro-subtitle {
 		@apply flex items-center gap-2 md:mb-4 mb-2;

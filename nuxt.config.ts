@@ -14,7 +14,6 @@ export default defineNuxtConfig({
 	modules: [
 		'@nuxtjs/tailwindcss',
 		'@pinia/nuxt',
-		// '@vueuse/nuxt',
 	],
 	build: {
 		transpile: ['gsap'],
