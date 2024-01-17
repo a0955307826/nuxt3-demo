@@ -1,10 +1,13 @@
 <template>
 	<section ref="hero" class="hero h-[100dvh]">
-		<div class="hero-banner opacity-30">
+		<div 
+			class="hero-banner"
+			:class="{ 'banner-anmation': is_banner_show}"
+		>
 			<img 
 				width="1440"
 				height="900"
-				class="absolute w-full h-full object-cover" 
+				class="w-full h-full object-cover" 
 				src="/images/banner.webp" 
 				alt="cover_image"
 			>
@@ -27,11 +30,63 @@
 <script setup>
 import { gsap } from "gsap";
 import { useGlobalStore } from "~/store";
-import { watchThrottled } from "@vueuse/core";
+import { watchThrottled, useWindowSize } from "@vueuse/core";
 const hero = ref();
 const store = useGlobalStore();
+const { width, height } = useWindowSize();
+const initGsap = () => {
+	gsap.context((self) => {
+		const title = self.selector(".hero-banner-title--move");
+		const hero = self.selector(".hero");
+		time1 = gsap.timeline({
+			scrollTrigger: {
+				trigger: hero,
+				start: "start center",
+				end: "40% center",
+				scrub: true,
+				markers: true
+			},
+		});
+		time1
+			.to(title, {
+				left: '50%',
+				top: '50%',
+				transform: 'translate(-50%, -50%)',
+				opacity: 1,
+				scale: 1,
+			})
+			.to(title, {
+				opacity: 0.5,
+				scale: 1.5,
+			})
+			.to(title, {
+				opacity: 0,
+				scale: 2,
+			})
+	}, hero.value);
+}
+
+watchThrottled(
+	width,
+	() => {
+		time1.kill();
+		initGsap();
+	},
+	{ throttle: 500 }
+);
+
+watchThrottled(
+	height,
+	() => {
+		time1.kill();
+		initGsap();
+	},
+	{ throttle: 500 }
+);
+
 
 const is_scroll_down = ref(false);
+const is_banner_show = ref(false);
 let time1;
 let timeout;
 
@@ -57,34 +112,9 @@ onMounted(() => {
 		document.body.classList.add('scroll-lock');
 		animationEnd.addEventListener('animationend', () => {
 			document.body.classList.remove('scroll-lock');
-			is_scroll_down.value = true
-			
-			gsap.context((self) => {
-				const title = self.selector(".hero-banner-title--move");
-				const hero = self.selector(".hero");
-				time1 = gsap.timeline({
-					scrollTrigger: {
-						trigger: hero,
-						start: "10% center",
-						end: "center center",
-						scrub: true,
-						// markers: true
-					},
-				});
-				time1
-					.to(title, {
-						opacity: 1,
-						scale: 1,
-					})
-					.to(title, {
-						opacity: 0.5,
-						scale: 1.5,
-					})
-					.to(title, {
-						opacity: 0,
-						scale: 2,
-					})
-			}, hero.value);
+			is_scroll_down.value = true;
+			is_banner_show.value = true;
+			initGsap();
 		});
 	}
 });
@@ -97,10 +127,6 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 
-.hero-banner {
-	@apply fixed top-0 left-0 w-full h-full;
-}
-
 @keyframes textWidth {
 	0% {
 		width: 0;
@@ -111,6 +137,24 @@ onBeforeUnmount(() => {
 		transform: scale(1);
 	}
 }
+
+@keyframes bannerInitAnimation {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: .3;
+	}
+}
+
+.hero-banner {
+	@apply fixed top-0 left-0 w-full h-full overflow-hidden opacity-0;
+}
+
+.banner-anmation {
+	animation: bannerInitAnimation 2s forwards;
+}
+
 .hero-banner-title {
 	left: 50%;
 	top: 50%;
@@ -137,11 +181,8 @@ onBeforeUnmount(() => {
 }
 
 .hero-banner-title--move {
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
 	text-shadow: 0px 3px 0px #F0f0f0, 0px 14px 10px rgba(0, 0, 0, 0.15),
 		0px 24px 2px rgba(0, 0, 0, 0.1), 0px 24px 32px rgba(0, 0, 0, 0.1);
-	@apply fixed tracking-widest font-black lg:leading-[150px] sm:leading-[100px] leading-[80px] lg:text-[120px] sm:text-[80px] xs:text-[60px] text-[40px] whitespace-nowrap;
+	@apply mx-auto fixed tracking-widest font-black lg:leading-[150px] sm:leading-[100px] leading-[80px] lg:text-[120px] sm:text-[80px] xs:text-[60px] text-[40px] whitespace-nowrap;
 }
 </style>

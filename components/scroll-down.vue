@@ -30,8 +30,7 @@
     font-weight: bold;
     text-transform: uppercase;
     padding-top: 2rem;
-    cursor: pointer;
-    @apply fixed bottom-[50px] left-1/2 -translate-x-1/2;
+    @apply fixed bottom-[10px] left-1/2 -translate-x-1/2;
 }
 
 .container_mouse .mouse-btn {
