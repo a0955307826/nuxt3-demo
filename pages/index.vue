@@ -1,9 +1,9 @@
 <template>
     <section class="layout-home">
-        <Banner />
-        <div class="h-[80dvh]"></div>
+        <!-- <Banner />
+        <div class="h-[70dvh]"></div>
         <Intro />
-        <Marquee />
+        <Marquee /> -->
         <Projects/>
     </section>
 </template>

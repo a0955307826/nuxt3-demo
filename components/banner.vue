@@ -44,7 +44,7 @@ const initGsap = () => {
 				start: "start center",
 				end: "40% center",
 				scrub: true,
-				markers: true
+				// markers: true
 			},
 		});
 		time1
@@ -143,7 +143,7 @@ onBeforeUnmount(() => {
 		opacity: 0;
 	}
 	100% {
-		opacity: .3;
+		opacity: .4;
 	}
 }
 
@@ -162,27 +162,30 @@ onBeforeUnmount(() => {
 	z-index: 10;
 	text-shadow: 0px 3px 0px #F0f0f0, 0px 14px 10px rgba(0, 0, 0, 0.15),
 		0px 24px 2px rgba(0, 0, 0, 0.1), 0px 24px 30px rgba(0, 0, 0, 0.1);
-	@apply fixed tracking-widest font-black lg:leading-[150px] sm:leading-[100px] leading-[80px] lg:text-[120px] sm:text-[80px] xs:text-[60px] text-[40px] whitespace-nowrap;
+		@apply mx-auto fixed tracking-widest font-black lg:leading-[150px] ms:leading-[100px] xs:leading-[80px] leading-[60px] lg:text-[120px] ms:text-[80px] sm:text-[60px] text-[40px] whitespace-nowrap;
 }
 
 .title1 {
 	overflow: hidden;
-	animation: textWidth 1.2s both steps(50);
+	animation: textWidth 1s both steps(50);
+	// animation: textWidth 1.2s both steps(50);
 }
 
 .title2 {
 	overflow: hidden;
-	animation: textWidth 1s both steps(50) 1s;
+	animation: textWidth .8s both steps(50) .8s;
+	// animation: textWidth 1s both steps(50) 1s;
 }
 
 .title3 {
 	overflow: hidden;
-	animation: textWidth 1s both steps(50) 2s;
+	animation: textWidth .8s both steps(50) 1.6s;
+	// animation: textWidth 1s both steps(50) 2s;
 }
 
 .hero-banner-title--move {
 	text-shadow: 0px 3px 0px #F0f0f0, 0px 14px 10px rgba(0, 0, 0, 0.15),
 		0px 24px 2px rgba(0, 0, 0, 0.1), 0px 24px 32px rgba(0, 0, 0, 0.1);
-	@apply mx-auto fixed tracking-widest font-black lg:leading-[150px] sm:leading-[100px] leading-[80px] lg:text-[120px] sm:text-[80px] xs:text-[60px] text-[40px] whitespace-nowrap;
+	@apply mx-auto fixed tracking-widest font-black lg:leading-[150px] ms:leading-[100px] xs:leading-[80px] leading-[60px] lg:text-[120px] ms:text-[80px] sm:text-[60px] text-[40px] whitespace-nowrap;
 }
 </style>

@@ -2,6 +2,10 @@
     @apply max-w-[1440px] mx-auto;
 }
 
+body {
+    background-color: #EEEDED;
+}
+
 .scroll-lock {
     position: fixed;
     top: 0;

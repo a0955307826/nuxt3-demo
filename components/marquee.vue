@@ -1,8 +1,8 @@
 <template>
     <div class="marquee">
-        <div class="marquee-move">HTML CSS JAVASCRIPT GSAP SASS TAILWIND NUXT VUE</div>
-        <div class="marquee-move">HTML CSS JAVASCRIPT GSAP SASS TAILWIND NUXT VUE</div>
-        <div class="marquee-move">HTML CSS JAVASCRIPT GSAP SASS TAILWIND NUXT VUE</div>
+        <div class="marquee-move">HTML CSS JAVASCRIPT GSAP SASS TAILWIND NUXT VUE VUETIFY</div>
+        <div class="marquee-move">HTML CSS JAVASCRIPT GSAP SASS TAILWIND NUXT VUE VUETIFY</div>
+        <div class="marquee-move">HTML CSS JAVASCRIPT GSAP SASS TAILWIND NUXT VUE VUETIFY</div>
     </div>
 </template>
 
