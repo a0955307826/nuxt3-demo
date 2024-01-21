@@ -1,10 +1,11 @@
 <template>
     <section class="layout-home">
-        <!-- <Banner />
+        <Banner />
         <div class="h-[70dvh]"></div>
         <Intro />
-        <Marquee /> -->
-        <Projects/>
+        <Marquee />
+        <ProjectsDesktop/>
+        <ProjectsMobile />
     </section>
 </template>
 
