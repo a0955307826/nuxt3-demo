@@ -42,7 +42,7 @@ const initGsap = () => {
 			scrollTrigger: {
 				trigger: hero,
 				start: "start center",
-				end: "40% center",
+				end: `+=${store.getIntroHeight - 150}px center`,
 				scrub: true,
 				// markers: true
 			},

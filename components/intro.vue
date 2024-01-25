@@ -25,8 +25,11 @@
 </template>
 
 <script setup>
-	import { useIntersectionObserver } from "@vueuse/core";
+	import { useGlobalStore } from "~/store"; 
+	import { useIntersectionObserver, watchThrottled, useWindowSize } from "@vueuse/core";
+	const store = useGlobalStore();
 	const intro = ref();
+	const { width } = useWindowSize();
 	const targetIsVisible = ref(false);
 	const intersectionObserverOptions = {
         threshold: 0.5, 
@@ -40,9 +43,21 @@
 		intersectionObserverOptions
 	);
 
-const description = ref(
-	"Lorem ipsum dolor sit amet, audire periculis efficiantur vix cu, ius dico omnesque maluisset ea. Sanctus accusata partiendo vim eu. Eu eum tation deseruisse, detraxit mediocritatem per at. Pri cu placerat fabellas disputando, in his magna populo fastidii. Adipisci consequat necessitatibus nec ex. Dictas omittam no vel, mel euismod molestie at.Lorem ipsum dolor sit amet, audire periculis efficiantur vix cu, ius dico omnesque maluisset ea. Sanctus accusata partiendo vim eu. Eu eum tation deseruisse, detraxit mediocritatem per at. Pri cu placerat fabellas disputando, in his magna populo fastidii. Adipisci consequat necessitatibus nec ex. Dictas omittam no vel, mel euismod molestie at."
-);
+	watchThrottled(
+		width,
+		() => {
+			store.getIntroHeight = intro.value.offsetTop;
+		},
+		{ throttle: 500 }
+	);
+
+	const description = ref(
+		"Lorem ipsum dolor sit amet, audire periculis efficiantur vix cu, ius dico omnesque maluisset ea. Sanctus accusata partiendo vim eu. Eu eum tation deseruisse, detraxit mediocritatem per at. Pri cu placerat fabellas disputando, in his magna populo fastidii. Adipisci consequat necessitatibus nec ex. Dictas omittam no vel, mel euismod molestie at.Lorem ipsum dolor sit amet, audire periculis efficiantur vix cu, ius dico omnesque maluisset ea. Sanctus accusata partiendo vim eu. Eu eum tation deseruisse, detraxit mediocritatem per at. Pri cu placerat fabellas disputando, in his magna populo fastidii. Adipisci consequat necessitatibus nec ex. Dictas omittam no vel, mel euismod molestie at."
+	);
+
+	onMounted(() => {
+		store.getIntroHeight = intro.value.offsetTop;
+	})
 </script>
 
 <style lang="scss" scoped>

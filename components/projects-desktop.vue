@@ -1,6 +1,6 @@
 <template>
 	<section 
-		class="projects relative w-full lg:h-[700px] mb-[120px] overflow-hidden"
+		class="projects relative w-full lg:h-[90vh] lg:mb-[120px] overflow-hidden"
 		ref="projects"
 	>
 		<div 
@@ -9,7 +9,7 @@
 		</div>
 		<div 
 			v-for="i in image_list"
-			:class="targetIsVisible ? 'w-[60%]' : 'w-0'"
+			:class="targetIsVisible ? 'w-[65%]' : 'w-0'"
 			:key="`main-image-${i}`"
 			class="main-image duration-500"
 		>
@@ -19,10 +19,7 @@
 				alt="cover_image"
 			>
 		</div>
-		<div 
-			v-if="width >= 992"
-			class="max-w-[1440px] mx-auto h-full z-10"
-		>
+		<div class="lg:block hidden max-w-[1440px] mx-auto h-full z-10">
 			<div class="w-full h-full gap-[80px] flex items-center pl-10">
 				<div 
 					v-for="i in image_list"
@@ -200,11 +197,11 @@
 
 	50% {
 		left: 0%;
-		width: 60%;
+		width: 65%;
 	}
 
 	100% {
-		left: 60%;
+		left: 65%;
 		width: 0%;
 	}
 }
@@ -228,7 +225,6 @@
 }
 
 .main-image-block-move {
-	content: '';
 	position: absolute;
 	left: 0;
 	top: 0;
