@@ -32,9 +32,10 @@
 					<div class="title font-bold leading-[50px] text-[68px] pb-6">{{ `title${i}` }}</div>
 					<div class="description font-medium text-[16px] pb-4">Lorem ipsum dolor sit amet, audire periculis efficiantur vix cu, ius dico omnesque maluisset ea. Sanctus accusata partiendo vim eu. Eu eum tation deseruisse, detraxit mediocritatem per at. Pri cu placerat fabellas disputando, in his magna populo fastidii. Adipisci consequat necessitatibus nec ex. Dictas omittam no vel, mel euismod molestie at.</div>
 					<button 
-						class="text-[#FFFFFF] px-4 py-3 font-bold rounded-[12px] hover:!bg-[#1D1D1D] duration-300"
+						class="btn text-[#FFFFFF] px-4 py-3 font-bold rounded-[12px] duration-300"
 						:style="{'background-color': 'rgba(29, 29, 29, .6)'}"
-						>VIEW MORE
+					>
+						<p class="relative z-10">VIEW MORE</p>
 					</button>
 				</div>
 				<div 
@@ -253,5 +254,27 @@
 
 .card-panel {
 	@apply lg:max-w-[480px] max-w-[200px] w-full lg:max-h-[300px] max-h-[200px] h-full lg:rounded-[32px] lg:mr-5 mr-4 cursor-grab active:cursor-grabbing overflow-hidden;
+}
+
+.btn {
+	position: relative;
+	overflow: hidden;
+	&::after {
+		@apply duration-300;
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		transform: translateX(-140px);
+		border-radius: 12px;
+		background: #1D1D1D;
+	}
+	&:hover {
+		&::after {
+			transform: translateX(0);
+		}
+	}
 }
 </style>
