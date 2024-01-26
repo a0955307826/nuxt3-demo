@@ -62,7 +62,7 @@
 
 <style lang="scss" scoped>
 .intro {
-	@apply lg:mx-10 mx-4;
+	@apply lg:mx-10 mx-4 mb-[120px];
 }
 .intro-wrap {
 	@media (min-width: 992px) {

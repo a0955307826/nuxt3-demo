@@ -3,9 +3,9 @@
         <Banner />
         <div class="h-[70dvh]"></div>
         <Intro />
-        <Marquee />
-        <ProjectsDesktop/>
-        <ProjectsMobile />
+        <div class="lg:h-[40dvh] h-[20vh]"></div>
+        <!-- <Marquee /> -->
+        <Projects/>
     </section>
 </template>
 

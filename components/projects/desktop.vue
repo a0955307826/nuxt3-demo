@@ -1,6 +1,6 @@
 <template>
 	<section 
-		class="projects relative w-full lg:h-[90vh] lg:mb-[120px] overflow-hidden"
+		class="projects relative w-full lg:h-[90vh] lg:mb-[120px] lg:mt-[-100px] overflow-hidden"
 		ref="projects"
 	>
 		<div 
@@ -32,8 +32,8 @@
 					<div class="title font-bold leading-[50px] text-[68px] pb-6">{{ `title${i}` }}</div>
 					<div class="description font-medium text-[16px] pb-4">Lorem ipsum dolor sit amet, audire periculis efficiantur vix cu, ius dico omnesque maluisset ea. Sanctus accusata partiendo vim eu. Eu eum tation deseruisse, detraxit mediocritatem per at. Pri cu placerat fabellas disputando, in his magna populo fastidii. Adipisci consequat necessitatibus nec ex. Dictas omittam no vel, mel euismod molestie at.</div>
 					<button 
-						class="text-[#FFFFFF] px-4 py-3 font-bold rounded-[12px]"
-						:style="{'background-color': 'rgba(29, 29, 29, .8)'}"
+						class="text-[#FFFFFF] px-4 py-3 font-bold rounded-[12px] hover:!bg-[#1D1D1D] duration-300"
+						:style="{'background-color': 'rgba(29, 29, 29, .6)'}"
 						>VIEW MORE
 					</button>
 				</div>
@@ -75,20 +75,23 @@
 						</div>
 						<div class="flex gap-4">
 							<div 
-								class="w-[50px] h-[50px] rounded-full bg-black flex items-center justify-center caret-transparent cursor-pointer"
+								class="w-[50px] h-[50px] rounded-full flex items-center justify-center caret-transparent hover:!bg-[#1d1d1d] duration-300 cursor-pointer"
+								:style="{'background-color': 'rgba(29, 29, 29, .6)'}"
 								@click="prev_image"
 							>
 								<img 
-									class="rotate-[-180deg]"  
+									class="rotate-[-180deg] pointer-events-none"  
 									src="/images/arrow.svg" 
 									alt="icon-arrow"
 								>
 							</div>
 							<div 
-								class="w-[50px] h-[50px] rounded-full bg-black flex items-center justify-center caret-transparent cursor-pointer"
+								class="w-[50px] h-[50px] rounded-full flex items-center justify-center caret-transparent hover:!bg-[#1d1d1d] duration-300 cursor-pointer"
+								:style="{'background-color': 'rgba(29, 29, 29, .6)'}"
 								@click="next_image"
 							>
 								<img 
+									class="pointer-events-none"
 									src="/images/arrow.svg" 
 									alt="icon-arrow"
 								>
@@ -144,7 +147,7 @@
 
 	const targetIsVisible = ref(false);
 	const intersectionObserverOptions = {
-        threshold: 0.5, 
+        threshold: 0.4, 
 	};
 
 	watch(targetIsVisible, (val) => {
