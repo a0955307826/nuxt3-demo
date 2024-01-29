@@ -1,6 +1,6 @@
 <template>
 	<section 
-		class="projects relative w-full lg:h-[90vh] lg:mb-[120px] lg:mt-[-100px] overflow-hidden"
+		class="projects relative w-full lg:h-[600px] lg:mb-[120px] lg:mt-[-100px] overflow-hidden"
 		ref="projects"
 	>
 		<div 

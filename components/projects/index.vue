@@ -33,27 +33,23 @@
 @keyframes project-animation {
     0% {
         width: 0;
-        opacity: 0;
     }
     100% {
         width: 100%;
-        opacity: 1;
     }
 }
 
 @keyframes remove-project-animation {
     0% {
         width: 100%;
-        opacity: 1;
     }
     100% {
         width: 0;
-        opacity: 0;
     }
 }
 
 .project-title {
-    @apply relative max-w-[1440px] mx-auto font-bold tracking-wider lg:text-[120px] text-[60px] z-10 lg:px-0 px-4 lg:mb-0 mb-6 overflow-hidden;
+    @apply relative w-fit max-w-[1440px] mx-auto font-bold tracking-wider lg:text-[120px] sm:text-[60px] text-[48px]  z-10 lg:px-0 px-4 lg:mb-0 mb-6 overflow-hidden;
     text-shadow: 0px 3px 0px #F0f0f0, 0px 14px 10px rgba(0, 0, 0, 0.15),
 		0px 24px 2px rgba(0, 0, 0, 0.1), 0px 24px 30px rgba(0, 0, 0, 0.1);
         p {
@@ -63,10 +59,10 @@
 }
 
 .projects-animation {
-    animation: project-animation 1s steps(50) forwards;
+    animation: project-animation 1.5s cubic-bezier(0.5, 1, 0.2, 1) forwards;
 }
 
 .remove-projects-animation {
-    animation: remove-project-animation 1s steps(50) forwards;
+    animation: remove-project-animation 1.5s cubic-bezier(0.5, 1, 0.2, 1) forwards;
 }
 </style>
