@@ -18,7 +18,14 @@
 				</div>
 			</div>
 			<div class="intro-right">
-				<p class="text-[16px] font-semibold">{{ description }}</p>
+				<div class="font-bold text-[24px] pb-3">Hello, I'm Ray</div>
+				<p class="text-[16px] font-semibold pb-4">{{ description }}</p>
+				<button 
+					class="btn sm:w-fit flex justify-center text-[#FFFFFF] px-4 py-3 font-bold rounded-[12px] duration-300"
+					:style="{'background-color': 'rgba(29, 29, 29, .6)'}"
+				>
+					<p class="relative w-fit z-10">CONTACT US</p>
+				</button>
 			</div>
 		</div>
 	</section>
@@ -52,7 +59,7 @@
 	);
 
 	const description = ref(
-		"Lorem ipsum dolor sit amet, audire periculis efficiantur vix cu, ius dico omnesque maluisset ea. Sanctus accusata partiendo vim eu. Eu eum tation deseruisse, detraxit mediocritatem per at."
+		"Lorem ipsum dolor sit amet, audire periculis efficiantur vix cu, ius dico omnesque maluisset ea. Sanctus accusata partiendo vim eu. Eu eum tation deseruisse, detraxit mediocritatem per at.Lorem ipsum dolor sit amet, audire periculis efficiantur vix cu, ius dico omnesque maluisset ea. Sanctus accusata partiendo vim eu. Eu eum tation deseruisse, detraxit mediocritatem per at."
 	);
 
 	onMounted(() => {
@@ -107,7 +114,7 @@
 		border-radius: 12px;
 	}
 	background-color: rgba(255, 255, 255, .8);
-	@apply flex items-center lg:max-w-[800px] lg:min-h-[300px] w-full h-full text-[#1d1d1d] lg:p-6 p-4 lg:rounded-r-[12px];
+	@apply flex justify-center flex-col lg:max-w-[800px] lg:min-h-[300px] w-full h-full text-[#1d1d1d] lg:p-6 p-4 lg:rounded-r-[12px];
 }
 
 .intro-left {
@@ -119,6 +126,28 @@
 		@apply lg:w-[300px] lg:h-[300px] w-[200px] h-[200px] lg:rounded-l-[12px] lg:mb-0 mb-6  mx-auto overflow-hidden;
 		img {
 			@apply w-full h-full object-cover;
+		}
+	}
+}
+
+.btn {
+	position: relative;
+	overflow: hidden;
+	&::after {
+		@apply duration-300;
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		transform: translateX(-100vw);
+		border-radius: 12px;
+		background: #1D1D1D;
+	}
+	&:hover {
+		&::after {
+			transform: translateX(0);
 		}
 	}
 }
