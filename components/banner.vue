@@ -31,9 +31,14 @@
 import { gsap } from "gsap";
 import { useGlobalStore } from "~/store";
 import { watchThrottled, useWindowSize } from "@vueuse/core";
+const { width, height } = useWindowSize();
 const hero = ref();
 const store = useGlobalStore();
-const { width, height } = useWindowSize();
+const is_scroll_down = ref(false);
+const is_banner_show = ref(false);
+let time1;
+let timeout;
+
 const initGsap = () => {
 	gsap.context((self) => {
 		const title = self.selector(".hero-banner-title--move");
@@ -67,36 +72,34 @@ const initGsap = () => {
 }
 
 watchThrottled(
-	width,
-	() => {
-		time1.kill();
-		initGsap();
-	},
-	{ throttle: 500 }
-);
-
-watchThrottled(
-	height,
-	() => {
-		time1.kill();
-		initGsap();
-	},
-	{ throttle: 500 }
-);
-
-
-const is_scroll_down = ref(false);
-const is_banner_show = ref(false);
-let time1;
-let timeout;
-
-watchThrottled(
 	() => store.scrollPosition,
 	(val) => {
 		if (val >= 0) {
             document.querySelector(".hero-banner-title").classList.add("hidden");
 			document.querySelector(".hero-banner-title--move").classList.remove("hidden");
 		} 
+	},
+	{ throttle: 500 }
+);
+
+watchThrottled(
+	width,
+	() => {
+		if(time1) {
+			time1.kill();
+			initGsap();
+		}
+	},
+	{ throttle: 500 }
+);
+
+watchThrottled(
+	() => store.getIntroHeight,
+	() => {
+		if(time1) {
+			time1.kill();
+			initGsap();
+		}
 	},
 	{ throttle: 500 }
 );
@@ -120,7 +123,9 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-	time1.kill();
+	if(time1) {
+		time1.kill();
+	}
 	clearTimeout(timeout);
 })
 </script>

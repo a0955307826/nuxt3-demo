@@ -93,15 +93,6 @@ onMounted(() => {
 	}
 }
 
-// .main-mobile-image-block {
-// 	position: absolute;
-// 	left: 0;
-// 	top: 0;
-// 	z-index: 4;
-// 	background: linear-gradient(45deg, #FFFFFF 0%, rgba(225, 5, 34, 0) 70%), linear-gradient(135deg, #FFFFFF 10%, rgba(49, 5, 209, 0) 80%), linear-gradient(225deg, #FFFFFF 10%, rgba(10, 219, 216, 0) 80%), linear-gradient(315deg, #050813 100%, rgba(9, 245, 5, 0) 70%);
-// 	@apply w-0 h-full z-[3];
-// }
-
 .projects-mobile {
     @apply lg:hidden relative;
 }

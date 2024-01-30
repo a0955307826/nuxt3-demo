@@ -1,6 +1,6 @@
 <template>
 	<section 
-		class="projects relative w-full lg:h-[600px] lg:mb-[120px] lg:mt-[-100px] overflow-hidden"
+		class="projects relative w-full lg:h-[700px] lg:mb-[120px] lg:mt-[-100px] overflow-hidden"
 		ref="projects"
 	>
 		<div 
@@ -9,7 +9,7 @@
 		</div>
 		<div 
 			v-for="i in image_list"
-			:class="targetIsVisible ? 'w-[65%]' : 'w-0'"
+			:class="targetIsVisible ? 'w-[60%]' : 'w-0'"
 			:key="`main-image-${i}`"
 			class="main-image duration-500"
 		>
@@ -201,11 +201,11 @@
 
 	50% {
 		left: 0%;
-		width: 65%;
+		width: 60%;
 	}
 
 	100% {
-		left: 65%;
+		left: 60%;
 		width: 0%;
 	}
 }

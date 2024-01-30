@@ -21,10 +21,10 @@
 				<div class="font-bold text-[24px] pb-3">Hello, I'm Ray</div>
 				<p class="text-[16px] font-semibold pb-4">{{ description }}</p>
 				<button 
-					class="btn sm:w-fit flex justify-center text-[#FFFFFF] px-4 py-3 font-bold rounded-[12px] duration-300"
+					class="btn sm:w-fit flex justify-center text-[#FFFFFF] px-4 py-3 font-medium rounded-[12px] duration-300"
 					:style="{'background-color': 'rgba(29, 29, 29, .6)'}"
 				>
-					<p class="relative w-fit z-10">CONTACT US</p>
+					<p class="relative font-bold tracking-wider w-fit z-10">CONTACT ME</p>
 				</button>
 			</div>
 		</div>
@@ -36,7 +36,7 @@
 	import { useIntersectionObserver, watchThrottled, useWindowSize } from "@vueuse/core";
 	const store = useGlobalStore();
 	const intro = ref();
-	const { width } = useWindowSize();
+	const { width, height } = useWindowSize();
 	const targetIsVisible = ref(false);
 	const intersectionObserverOptions = {
         threshold: 0.5, 
@@ -50,8 +50,16 @@
 		intersectionObserverOptions
 	);
 
+	// watchThrottled(
+	// 	width,
+	// 	() => {
+	// 		store.getIntroHeight = intro.value.offsetTop;
+	// 	},
+	// 	{ throttle: 500 }
+	// );
+
 	watchThrottled(
-		width,
+		height,
 		() => {
 			store.getIntroHeight = intro.value.offsetTop;
 		},
@@ -134,14 +142,13 @@
 	position: relative;
 	overflow: hidden;
 	&::after {
-		@apply duration-300;
+		@apply duration-300 lg:translate-x-[-140px];
 		content: '';
 		position: absolute;
 		top: 0;
 		left: 0;
 		height: 100%;
 		width: 100%;
-		transform: translateX(-100vw);
 		border-radius: 12px;
 		background: #1D1D1D;
 	}

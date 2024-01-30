@@ -6,20 +6,20 @@
 				>SKILLS
 			</p>
 		</div>
-		<div class="grid gap-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
+		<div class="grid lg:gap-5 gap-3 lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
 			<div 
 				v-for="(item, index) in skill_list" 
 				:key="`skill-${index}`"
 				class="skill-item"
 			>
-				<div class="max-w-[100px] h-[100px]">
+				<div class="sm:max-w-[100px] max-w-[50px] w-full sm:max-h-[100px] max-h-[50px] h-full">
 					<img 
 						class="w-full h-full object-contain" 
 						:src="`/images/${item.img}`" 
 						:alt="item.alt"
 					>
 				</div>
-				<p>{{ item.name }}</p>
+				<p class="tracking-wider font-medium">{{ item.name }}</p>
 			</div>
 		</div>
 	</section>
@@ -73,7 +73,7 @@
 			alt: 'tailwind'
 		},
 		{
-			name: 'SASS / SCSS',
+			name: 'SCSS',
 			img: 'icon-sass.svg',
 			alt: 'sass'
 		},
@@ -83,6 +83,36 @@
 			alt: 'gsap'
 		},
 	])
+
+	const initObserver = () => {
+		const skill_item = document.querySelectorAll('.skill-item');
+		const options = {
+			rootMargin: '100px 0px',
+			threshold: 0.8
+		}
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if(entry.isIntersecting) {
+						entry.target.classList.add('skill-card-animation');
+						entry.target.classList.remove('remove-skill-card-animation');
+					} 
+					else {
+						entry.target.classList.add('remove-skill-card-animation');
+						entry.target.classList.remove('skill-card-animation');
+					}
+				});
+			},
+			options
+		);
+		skill_item.forEach((el) => {
+			observer.observe(el);
+		});
+	}
+
+	onMounted(() => {
+		initObserver();
+	});
 </script>
 
 <style lang="scss" scoped>
@@ -105,18 +135,9 @@
 		cursor: pointer;
 		border-radius: 12px;
 		background-color: rgba(255, 255, 255, .8);
-		@apply border-[2px] border-solid border-white gap-5 flex items-center justify-center flex-col py-[50px] px-[20px] duration-300;
-		img {
-			@media (min-width: 992px) {
-				filter: invert(0.3);
-				@apply duration-300;
-			}
-		}
+		@apply border-[2px] border-solid border-white lg:gap-5 gap-3 flex items-center justify-center flex-col sm:py-[50px] py-[30px] sm:px-[20px] px-[10px] duration-300;
 		&:hover {
 			@apply border-[#2e2e2e] bg-white;
-			img {
-				filter: invert(0);
-			}
 		}
 	}
 
@@ -138,11 +159,43 @@
 		}
 	}
 
+	@keyframes imageOpacity {
+		0% {
+			transform: translateY(50px);
+			opacity: 0;
+		}
+
+		100% {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
+
+	@keyframes removeOpacity {
+		0% {
+			transform: translateY(0);
+			opacity: 1;
+		}
+
+		100% {
+			transform: translateY(50px);
+			opacity: 0;
+		}
+	}
+
 	.skill-animation {
 		animation: project-animation 1.5s cubic-bezier(0.5, 1, 0.2, 1) forwards;
 	}
 
 	.remove-skill-animation {
 		animation: remove-project-animation 1.5s cubic-bezier(0.5, 1, 0.2, 1) forwards;
+	}
+
+	.skill-card-animation {
+		animation: imageOpacity 1s cubic-bezier(0.5, 1, 0.2, 1) forwards;
+	}
+
+	.remove-skill-card-animation {
+		animation: removeOpacity 1s cubic-bezier(0.5, 1, 0.2, 1) forwards;
 	}
 </style>
