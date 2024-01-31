@@ -1,5 +1,5 @@
 <template>
-    <section class="main-project">
+    <section ref="main_project" class="main-project">
         <div class="project-title" ref="projectTitle">
             <p 
                 :class="targetIsVisible ? 'projects-animation' : 'remove-projects-animation'"
@@ -13,7 +13,11 @@
 
 <script setup>
     import { useIntersectionObserver } from '@vueuse/core';
+    import { useGlobalStore } from "~/store"; 
+
     const projectTitle = ref();
+    const main_project = ref();
+    const store = useGlobalStore();
     const targetIsVisible = ref(false);
 	const intersectionObserverOptions = {
         threshold: 0.5, 
@@ -26,6 +30,7 @@
 		},
 		intersectionObserverOptions
 	);
+
 
 </script>
 

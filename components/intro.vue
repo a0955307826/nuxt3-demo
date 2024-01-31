@@ -1,7 +1,7 @@
 <template>
 	<section 
 		ref="intro" 
-		class="intro h-[80vh]"
+		class="intro"
 	>
 		<div 
 			class="intro-wrap"
@@ -46,7 +46,6 @@
 		intro,
 		([{ isIntersecting }]) => {
 			targetIsVisible.value = isIntersecting;
-			// store.area_scoped[0] = isIntersecting;
 		},
 		intersectionObserverOptions
 	);
@@ -135,7 +134,7 @@
 	position: relative;
 	overflow: hidden;
 	&::after {
-		@apply duration-300 lg:translate-x-[-140px];
+		@apply duration-300 lg:translate-x-[-200px];
 		content: '';
 		position: absolute;
 		top: 0;

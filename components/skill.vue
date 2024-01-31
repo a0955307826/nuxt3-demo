@@ -1,5 +1,5 @@
 <template>
-	<section class="skill h-[120vh]">
+	<section ref="main_skill" class="skill">
 		<div ref="skill" class="skill-title">
 			<p 
 				:class="targetIsVisible ? 'skill-animation' : 'remove-skill-animation'"
@@ -30,6 +30,7 @@
 	import { useGlobalStore } from "~/store"; 
 	const store = useGlobalStore();
     const skill = ref();
+	const main_skill = ref();
     const targetIsVisible = ref(false);
 	const intersectionObserverOptions = {
         threshold: 0.5, 

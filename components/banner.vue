@@ -1,5 +1,5 @@
 <template>
-	<section ref="hero" class="hero h-[150vh]">
+	<section ref="hero" class="hero h-[100vh]">
 		<div 
 			class="hero-banner"
 			:class="{ 'banner-anmation': is_banner_show}"

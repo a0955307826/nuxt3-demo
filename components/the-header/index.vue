@@ -10,7 +10,7 @@
 				v-for="(item, index) in nav_list" 
 				:key="`header-${index}`"
 				class="nav-name font-bold text-[20px] tracking-wider duration-300 cursor-pointer"
-				:class="set_nav_class(index)"
+				:class="[set_nav_class(index), {'nav-name__area-white': store.area_scoped[index]}]"
 				@click="get_element_handler(item.element)"
 				>{{ item.name }}
 			</div>
@@ -19,26 +19,29 @@
 </template>
 
 <script setup>
-	import { useWindowSize } from "@vueuse/core";
+	import { useWindowSize, useWindowScroll, watchThrottled  } from "@vueuse/core";
 	import { useGlobalStore } from '~/store';
 	const { width } = useWindowSize();
+	const { x, y } = useWindowScroll();
 	const store = useGlobalStore();
 
+	const save_area_top = ref([]);
+	const save_area_bottom = ref([]);
 	const nav_list = ref([
 		{ 
-			name: 'INTRO',
+			name: 'Intro',
 			element: 'intro'
 		}, 
 		{ 
-			name: 'SKILLS',
+			name: 'Skills',
 			element: 'skill'
 		}, 
 		{ 
-			name: 'PROJECTS',
-			element: 'project-title' 
+			name: 'Projects',
+			element: 'main-project' 
 		}, 
 		{ 
-			name: 'CONTACT',
+			name: 'Contact',
 			element: 'contact' 
 		}
 	])
@@ -59,6 +62,34 @@
 		}
 		useScrollToArea(element_offsetTop);
 	}
+
+	const get_area_height = () => {
+		save_area_top.value = [];
+		save_area_bottom.value = [];
+		for(let i = 0; i < nav_list.value.length; i++) {
+			let get_area_element = document.querySelector(`.${nav_list.value[i].element}`);
+			save_area_top.value.push(get_area_element?.offsetTop - 580);
+			save_area_bottom.value.push(get_area_element?.offsetTop + get_area_element?.offsetHeight - 200);
+		}
+	}
+
+	watch(y, (val) => {
+		for(let i = 0; i < 4; i++) {
+			store.area_scoped[i] = val >= save_area_top.value[i] && val < save_area_bottom.value[i];
+		}
+	})
+
+	watchThrottled(
+		width,
+		() => { 
+			get_area_height();
+		},
+		{ throttle: 500 },
+	)
+
+	onMounted(() => {
+		get_area_height()
+	})
 </script>
 
 <style lang="scss" scoped>
