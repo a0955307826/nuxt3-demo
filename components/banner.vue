@@ -1,5 +1,5 @@
 <template>
-	<section ref="hero" class="hero h-[100dvh]">
+	<section ref="hero" class="hero h-[150vh]">
 		<div 
 			class="hero-banner"
 			:class="{ 'banner-anmation': is_banner_show}"
@@ -117,6 +117,7 @@ onMounted(() => {
 			document.body.classList.remove('scroll-lock');
 			is_scroll_down.value = true;
 			is_banner_show.value = true;
+			store.is_header_display = true;
 			initGsap();
 		});
 	}

@@ -3,6 +3,8 @@ export const useGlobalStore = defineStore('global', {
     state: () => ({
         scrollPosition: 0,
         getIntroHeight: 0,
+        is_header_display: false,
+        area_scoped: [false, false, false, false]
     }),
     getters: {
         

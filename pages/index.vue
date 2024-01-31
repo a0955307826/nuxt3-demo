@@ -1,12 +1,12 @@
 <template>
     <section class="layout-home">
         <Banner />
-        <div class="h-[70dvh]"></div>
+        <!-- <div class="h-[70dvh]"></div> -->
         <Intro />
-        <div class="lg:h-[30dvh] h-[20vh]"></div>
+        <!-- <div class="h-[40dvh]"></div> -->
         <!-- <Marquee /> -->
         <Skill />
-        <div class="lg:h-[40dvh] h-[20vh]"></div>
+        <!-- <div class="h-[40dvh]"></div> -->
         <Projects/>
     </section>
 </template>

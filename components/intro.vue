@@ -1,7 +1,7 @@
 <template>
 	<section 
 		ref="intro" 
-		class="intro"
+		class="intro h-[80vh]"
 	>
 		<div 
 			class="intro-wrap"
@@ -46,17 +46,10 @@
 		intro,
 		([{ isIntersecting }]) => {
 			targetIsVisible.value = isIntersecting;
+			// store.area_scoped[0] = isIntersecting;
 		},
 		intersectionObserverOptions
 	);
-
-	// watchThrottled(
-	// 	width,
-	// 	() => {
-	// 		store.getIntroHeight = intro.value.offsetTop;
-	// 	},
-	// 	{ throttle: 500 }
-	// );
 
 	watchThrottled(
 		height,

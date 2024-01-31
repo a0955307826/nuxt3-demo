@@ -109,6 +109,8 @@
 	import Flicking from "@egjs/vue3-flicking";
 	import "@egjs/vue3-flicking/dist/flicking.css";
 	import { useWindowSize, useIntersectionObserver } from '@vueuse/core';
+	import { useGlobalStore } from "~/store"; 
+	const store = useGlobalStore();
     const { width } = useWindowSize();
 
 	const flickingIndex = ref(0);

@@ -1,5 +1,5 @@
 <template>
-    <section class="projects-mobile px-4 mb-[120px]">
+    <section ref="projects_mobile" class="projects-mobile px-4 mb-[120px]">
 		<div class="grid md:grid-cols-2 gap-5">
 			<div
 				class="main-mobile-image opacity-0 translate-y-[25px] lg:mb-10 rounded-[12px] overflow-hidden"
@@ -34,6 +34,7 @@
 </template>
 
 <script setup>
+const projects_mobile = ref();
 const image_list = ref([1, 2, 3, 4, 5, 6, 7]);
 
 const initObserver = () => {

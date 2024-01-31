@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="main-project">
         <div class="project-title" ref="projectTitle">
             <p 
                 :class="targetIsVisible ? 'projects-animation' : 'remove-projects-animation'"

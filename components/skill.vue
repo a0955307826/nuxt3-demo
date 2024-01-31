@@ -1,5 +1,5 @@
 <template>
-	<section class="skill">
+	<section class="skill h-[120vh]">
 		<div ref="skill" class="skill-title">
 			<p 
 				:class="targetIsVisible ? 'skill-animation' : 'remove-skill-animation'"
@@ -27,6 +27,8 @@
 
 <script setup>
 	import { useIntersectionObserver } from '@vueuse/core';
+	import { useGlobalStore } from "~/store"; 
+	const store = useGlobalStore();
     const skill = ref();
     const targetIsVisible = ref(false);
 	const intersectionObserverOptions = {
