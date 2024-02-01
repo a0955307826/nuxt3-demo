@@ -27,10 +27,7 @@
 
 <script setup>
 	import { useIntersectionObserver } from '@vueuse/core';
-	import { useGlobalStore } from "~/store"; 
-	const store = useGlobalStore();
     const skill = ref();
-	const main_skill = ref();
     const targetIsVisible = ref(false);
 	const intersectionObserverOptions = {
         threshold: 0.5, 
