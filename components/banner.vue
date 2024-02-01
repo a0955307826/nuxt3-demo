@@ -105,21 +105,24 @@ watchThrottled(
 	{ throttle: 500 }
 );
 
-// if(store.is_header_display) {
-// 	is_scroll_down.value = true;
-// 	is_banner_show.value = true;
-// }
+const stopTitleAnimation = () => {
+	const animationStop = document.querySelector('.hero-banner-title');
+	const showMoveTitle = document.querySelector('.hero-banner-title--move');
+	is_scroll_down.value = true;
+	is_banner_show.value = true;
+	animationStop.classList.add('hidden');
+	showMoveTitle.classList.remove('hidden');
+	initGsap();
+}
 
 
 onMounted(() => {
-	const animationEnd = document.querySelector('.title3');
 	if(store.is_header_display) {
-		is_scroll_down.value = true;
-		is_banner_show.value = true;
-		initGsap();
+		stopTitleAnimation();
 		return;
 	}
 
+	const animationEnd = document.querySelector('.title3');
 	document.body.classList.add('scroll-lock');
 	animationEnd.addEventListener('animationend', () => {
 		document.body.classList.remove('scroll-lock');

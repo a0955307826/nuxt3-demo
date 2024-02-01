@@ -6,10 +6,7 @@
 				v-for="(item, index) in image_list"
 				:key="`main-mobile-image-${index}`"
 			>
-				<div
-					class="relative aspect-w-16 aspect-h-12"
-					:data-type="i"
-				>
+				<div class="relative aspect-w-16 aspect-h-12">
 					<img
 						class="w-full h-full object-cover"
 						:src="`https://picsum.photos/1920/1080?random=${index + 1}`"

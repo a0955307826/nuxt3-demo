@@ -116,25 +116,44 @@
 	const flickingIndex = ref(0);
 	const image_list = ref([
 		{
-			name: 'Welend'
+			name: 'Welend',
+			image: '',
+			description: ''
 		},
 		{
-			name: 'Hkadc'
+			name: 'Hkadc',
+			image: '',
+			description: ''
 		},
 		{
-			name: 'Wynn'
+			name: 'Medisana',
+			image: '',
+			description: ''
 		},
 		{
-			name: 'Yidan'
+			name: 'Wynn',
+			image: '',
+			description: ''
 		},
 		{
-			name: 'Ego'
+			name: 'Yidan',
+			image: '',
+			description: ''
 		},
 		{
-			name: 'Muster'
+			name: 'Ego',
+			image: '',
+			description: ''
 		},
 		{
-			name: 'Centaline'
+			name: 'Muster',
+			image: '',
+			description: ''
+		},
+		{
+			name: 'Centaline',
+			image: '',
+			description: ''
 		}
 	]);
 	const isTextOpacity = ref(false);
