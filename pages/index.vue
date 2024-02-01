@@ -3,10 +3,10 @@
         <Banner />
         <div class="h-[70dvh]"></div>
         <Intro />
-        <div class="h-[45dvh]"></div>
+        <div class="lg:h-[45dvh] h-[35dvh]"></div>
         <!-- <Marquee /> -->
         <Skill />
-        <div class="h-[45dvh]"></div>
+        <div class="lg:h-[45dvh] h-[35dvh]"></div>
         <Projects/>
     </section>
 </template>

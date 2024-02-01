@@ -3,8 +3,8 @@
 		<div class="grid md:grid-cols-2 gap-5">
 			<div
 				class="main-mobile-image opacity-0 translate-y-[25px] lg:mb-10 rounded-[12px] overflow-hidden"
-				v-for="i in image_list"
-				:key="`main-mobile-image-${i}`"
+				v-for="(item, index) in image_list"
+				:key="`main-mobile-image-${index}`"
 			>
 				<div
 					class="relative aspect-w-16 aspect-h-12"
@@ -12,7 +12,7 @@
 				>
 					<img
 						class="w-full h-full object-cover"
-						:src="`https://picsum.photos/1920/1080?random=${i}`"
+						:src="`https://picsum.photos/1920/1080?random=${index + 1}`"
 						alt="cover_image"
 					/>
 				</div>
@@ -20,7 +20,7 @@
 					class="content px-4 py-6"
 					:style="{'background-color': 'rgba(255, 255, 255, .8)'}"
 				>
-					<div class="title font-bold leading-[24px] text-[36px] pb-3">{{ `title${i}` }}</div>
+					<div class="title font-bold leading-[24px] text-[36px] pb-3">{{ item.name }}</div>
 					<div class="description font-medium text-[16px] pb-4">Lorem ipsum dolor sit amet, audire periculis efficiantur vix cu, ius dico omnesque maluisset ea. Sanctus accusata partiendo vim eu. Eu eum tation deseruisse, detraxit mediocritatem per at.</div>
 					<button 
 						class="text-[#FFFFFF] px-4 py-3 font-bold rounded-[12px]"
@@ -35,7 +35,29 @@
 
 <script setup>
 const projects_mobile = ref();
-const image_list = ref([1, 2, 3, 4, 5, 6, 7]);
+const image_list = ref([
+	{
+		name: 'Welend'
+	},
+	{
+		name: 'Hkadc'
+	},
+	{
+		name: 'Wynn'
+	},
+	{
+		name: 'Yidan'
+	},
+	{
+		name: 'Ego'
+	},
+	{
+		name: 'Muster'
+	},
+	{
+		name: 'Centaline'
+	}
+]);
 
 const initObserver = () => {
 	const main_mobile_block = document.querySelectorAll('.main-mobile-image');

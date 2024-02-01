@@ -1,11 +1,10 @@
 <template>
 	<header 
+		v-if="store.is_header_display"
 		class="the-header"
-		:class="[{ 'the-header--scroll': store.scrollPosition >= 50 }, store.is_header_display ? 'opacity-100' : 'opacity-0']"
+		:class="{ 'the-header--scroll': store.scrollPosition >= 50 }"
 	>
-		<nav 
-			class="container h-[60px] gap-8 flex items-center justify-end lg:px-10 px-4 duration-300"
-		>
+		<nav class="nav-wrap nav-wrap--hidden container h-[60px] gap-8 flex items-center justify-end lg:px-10 px-4 duration-300 overflow-hidden">
 			<div 
 				v-for="(item, index) in nav_list" 
 				:key="`header-${index}`"
@@ -14,6 +13,7 @@
 				@click="get_element_handler(item.element)"
 				>{{ item.name }}
 			</div>
+			<TheHeaderLang />
 		</nav>
 	</header>
 </template>
@@ -21,30 +21,33 @@
 <script setup>
 	import { useWindowSize, useWindowScroll, watchThrottled  } from "@vueuse/core";
 	import { useGlobalStore } from '~/store';
-	const { width } = useWindowSize();
+	const { width, height } = useWindowSize();
 	const { x, y } = useWindowScroll();
 	const store = useGlobalStore();
+	const { t } = useI18n();
 
 	const save_area_top = ref([]);
 	const save_area_bottom = ref([]);
-	const nav_list = ref([
-		{ 
-			name: 'Intro',
-			element: 'intro'
-		}, 
-		{ 
-			name: 'Skills',
-			element: 'skill'
-		}, 
-		{ 
-			name: 'Projects',
-			element: 'main-project' 
-		}, 
-		{ 
-			name: 'Contact',
-			element: 'contact' 
-		}
-	])
+	const nav_list = computed(() => {
+		return [
+			{ 
+				name: t('text_intro'),
+				element: 'intro'
+			}, 
+			{ 
+				name: t('text_skill'),
+				element: 'skill'
+			}, 
+			{ 
+				name: t("text_project"),
+				element: 'main-project' 
+			}, 
+			{ 
+				name: 'Contact',
+				element: 'contact' 
+			}
+		]
+	})
 
 	const set_nav_class = (index) => {
 		if(store.area_scoped[index]) {
@@ -74,7 +77,7 @@
 	}
 
 	watch(y, (val) => {
-		for(let i = 0; i < 4; i++) {
+		for(let i = 0; i < save_area_top.value.length; i++) {
 			store.area_scoped[i] = val >= save_area_top.value[i] && val < save_area_bottom.value[i];
 		}
 	})
@@ -87,14 +90,36 @@
 		{ throttle: 500 },
 	)
 
+	watchThrottled(
+		height,
+		() => { 
+			get_area_height();
+		},
+		{ throttle: 500 },
+	)
+
 	onMounted(() => {
-		get_area_height()
+		get_area_height();
+		if(store.is_header_display) {
+			document.querySelector('.nav-wrap')?.classList?.remove('nav-wrap--hidden');
+			document.querySelector('.nav-wrap')?.classList?.add('nav-wrap--show');
+		}
 	})
 </script>
 
 <style lang="scss" scoped>
 .the-header {
 	@apply fixed top-0 left-0 w-full h-0 duration-300 z-[9999];
+}
+
+.nav-wrap {
+	@apply duration-500;
+	&--hidden {
+		@apply opacity-0 pointer-events-none;
+	}
+	&--show {
+		@apply opacity-100;
+	}
 }
 
 .the-header--scroll {

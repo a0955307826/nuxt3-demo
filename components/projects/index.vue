@@ -2,8 +2,9 @@
     <section ref="main_project" class="main-project">
         <div class="project-title" ref="projectTitle">
             <p 
+                class="whitespace-nowrap"
                 :class="targetIsVisible ? 'projects-animation' : 'remove-projects-animation'"
-                >PROJECTS
+                >{{ t('text_project') }}
             </p>
         </div>
         <ProjectsDesktop />
@@ -15,6 +16,7 @@
     import { useIntersectionObserver } from '@vueuse/core';
     import { useGlobalStore } from "~/store"; 
 
+    const { t } = useI18n();
     const projectTitle = ref();
     const main_project = ref();
     const store = useGlobalStore();

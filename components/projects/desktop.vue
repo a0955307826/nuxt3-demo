@@ -8,28 +8,28 @@
 			:class="{'image-animation': targetIsVisible}">
 		</div>
 		<div 
-			v-for="i in image_list"
+			v-for="(i, index) in image_list"
 			:class="targetIsVisible ? 'w-[60%]' : 'w-0'"
 			:key="`main-image-${i}`"
 			class="main-image duration-500"
 		>
 			<img 
-				:class="flickingIndex + 1 === i ? 'main-image-animation' : 'main-image-change'"
-				:src="`https://picsum.photos/1920/1080?random=${i}`" 
+				:class="flickingIndex + 1 === index + 1 ? 'main-image-animation' : 'main-image-change'"
+				:src="`https://picsum.photos/1920/1080?random=${index + 1}`" 
 				alt="cover_image"
 			>
 		</div>
 		<div class="lg:block hidden max-w-[1440px] mx-auto h-full z-10">
 			<div class="w-full h-full gap-[80px] flex items-center pl-10">
 				<div 
-					v-for="i in image_list"
-					:key="`text-${i}`"
-					v-show="flickingIndex + 1 === i"
+					v-for="(item, index) in image_list"
+					:key="`text-${index}`"
+					v-show="flickingIndex + 1 === index + 1"
 					class="relative intro max-w-[800px] text-[#1d1d1d] opacity-0 translate-y-[50px] rounded-[12px] z-10"
-					:class="{ 'text-animation p-8': flickingIndex + 1 === i && is_main_animation_finish}"
+					:class="{ 'text-animation p-8': flickingIndex + 1 === index + 1 && is_main_animation_finish}"
 					:style="{'background-color': 'rgba(255, 255, 255, .8)'}"
 				>
-					<div class="title font-bold leading-[50px] text-[68px] pb-6">{{ `title${i}` }}</div>
+					<div class="title font-bold leading-[50px] text-[68px] pb-6">{{ item.name }}</div>
 					<div class="description font-medium text-[16px] pb-4">Lorem ipsum dolor sit amet, audire periculis efficiantur vix cu, ius dico omnesque maluisset ea. Sanctus accusata partiendo vim eu. Eu eum tation deseruisse, detraxit mediocritatem per at. Pri cu placerat fabellas disputando, in his magna populo fastidii. Adipisci consequat necessitatibus nec ex. Dictas omittam no vel, mel euismod molestie at.</div>
 					<button 
 						class="btn text-[#FFFFFF] px-4 py-3 font-bold rounded-[12px] duration-300"
@@ -53,15 +53,15 @@
 						@will-change="flickingChange"
 					>
 						<div 
-							v-for="i in 7" 
-							:key="i"
+							v-for="(item, index) in image_list" 
+							:key="`flicking-${index}`"
 							class="card-panel brightness-50 hover:brightness-100 duration-300"
 						>
 							<img 
 								width="480"
 								height="300"
 								class="w-full h-full object-cover pointer-events-none" 
-								:src="`https://picsum.photos/1920/1080?random=${i}`" 
+								:src="`https://picsum.photos/1920/1080?random=${index + 1}`" 
 								alt="flicking-image"
 							>
 						</div>
@@ -72,7 +72,7 @@
 							:class="isTextOpacity ? 'opacity-0 translate-y-[25px]' : 'opacity-100 translate-y-0 duration-300'"
 							:style="{'background-color': 'rgba(255, 255, 255, .8)'}"
 						>
-							<p>{{ `title${get_image_index}` }}</p>
+							<p>{{ get_image_title }}</p>
 						</div>
 						<div class="flex gap-4">
 							<div 
@@ -114,7 +114,29 @@
     const { width } = useWindowSize();
 
 	const flickingIndex = ref(0);
-	const image_list = ref([1, 2, 3, 4, 5, 6, 7]);
+	const image_list = ref([
+		{
+			name: 'Welend'
+		},
+		{
+			name: 'Hkadc'
+		},
+		{
+			name: 'Wynn'
+		},
+		{
+			name: 'Yidan'
+		},
+		{
+			name: 'Ego'
+		},
+		{
+			name: 'Muster'
+		},
+		{
+			name: 'Centaline'
+		}
+	]);
 	const isTextOpacity = ref(false);
 	const timeout = ref(0);
 	const is_main_animation_finish = ref(false);
@@ -123,11 +145,11 @@
 	const flicking = ref();
 	const projects = ref();
 
-	const get_image_index = computed(() => {
+	const get_image_title = computed(() => {
 		if(image_list.value.length < flickingIndex.value + 2) {
-			return 1;
+			return image_list.value[0].name;
 		}
-		return flickingIndex.value + 2;
+		return image_list.value[flickingIndex.value + 1].name;
 	});
 
 	const prev_image = () => {

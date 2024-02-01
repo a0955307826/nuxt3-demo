@@ -2,8 +2,9 @@
 	<section ref="main_skill" class="skill">
 		<div ref="skill" class="skill-title">
 			<p 
+				class="whitespace-nowrap"
 				:class="targetIsVisible ? 'skill-animation' : 'remove-skill-animation'"
-				>SKILLS
+				>{{ t('text_skill') }}
 			</p>
 		</div>
 		<div class="grid lg:gap-5 gap-3 lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
@@ -28,6 +29,7 @@
 <script setup>
 	import { useIntersectionObserver } from '@vueuse/core';
     const skill = ref();
+	const { t } = useI18n();
     const targetIsVisible = ref(false);
 	const intersectionObserverOptions = {
         threshold: 0.5, 

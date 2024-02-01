@@ -2,7 +2,7 @@
 	<section ref="hero" class="hero h-[100vh]">
 		<div 
 			class="hero-banner"
-			:class="{ 'banner-anmation': is_banner_show}"
+			:class="{ 'banner-animation': is_banner_show}"
 		>
 			<img 
 				width="1440"
@@ -31,6 +31,7 @@
 import { gsap } from "gsap";
 import { useGlobalStore } from "~/store";
 import { watchThrottled, useWindowSize } from "@vueuse/core";
+const { locale } = useI18n();
 const { width, height } = useWindowSize();
 const hero = ref();
 const store = useGlobalStore();
@@ -104,23 +105,29 @@ watchThrottled(
 	{ throttle: 500 }
 );
 
+// if(store.is_header_display) {
+// 	is_scroll_down.value = true;
+// 	is_banner_show.value = true;
+// }
+
+
 onMounted(() => {
 	const animationEnd = document.querySelector('.title3');
-	const is_banner_title = document.querySelector(".hero-banner-title .hidden")?.classList.contains('hidden')
-	if(store.scrollPosition > 0) {
-		document.querySelector(".hero-banner-title")?.classList.add("hidden");
-		document.querySelector(".hero-banner-title--move")?.classList.remove("hidden");
+	if(store.is_header_display) {
+		is_scroll_down.value = true;
+		is_banner_show.value = true;
+		initGsap();
+		return;
 	}
-	if(!is_banner_title) {
-		document.body.classList.add('scroll-lock');
-		animationEnd.addEventListener('animationend', () => {
-			document.body.classList.remove('scroll-lock');
-			is_scroll_down.value = true;
-			is_banner_show.value = true;
-			store.is_header_display = true;
-			initGsap();
-		});
-	}
+
+	document.body.classList.add('scroll-lock');
+	animationEnd.addEventListener('animationend', () => {
+		document.body.classList.remove('scroll-lock');
+		is_scroll_down.value = true;
+		is_banner_show.value = true;
+		store.is_header_display = true;
+		initGsap();
+	});
 });
 
 onBeforeUnmount(() => {
@@ -157,8 +164,8 @@ onBeforeUnmount(() => {
 	@apply fixed top-0 left-0 w-full h-full overflow-hidden opacity-0;
 }
 
-.banner-anmation {
-	animation: bannerInitAnimation 2s forwards;
+.banner-animation {
+	animation: bannerInitAnimation 2s cubic-bezier(0.5, 1, 0.2, 1) forwards;
 }
 
 .hero-banner-title {
@@ -174,19 +181,16 @@ onBeforeUnmount(() => {
 .title1 {
 	overflow: hidden;
 	animation: textWidth 1s both steps(50);
-	// animation: textWidth 1.2s both steps(50);
 }
 
 .title2 {
 	overflow: hidden;
 	animation: textWidth .8s both steps(50) .8s;
-	// animation: textWidth 1s both steps(50) 1s;
 }
 
 .title3 {
 	overflow: hidden;
 	animation: textWidth .8s both steps(50) 1.6s;
-	// animation: textWidth 1s both steps(50) 2s;
 }
 
 .hero-banner-title--move {
