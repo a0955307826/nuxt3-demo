@@ -4,14 +4,21 @@
 		class="the-header"
 		:class="{ 'the-header--scroll': store.scrollPosition >= 50 }"
 	>
-		<nav class="nav-wrap nav-wrap--hidden container h-[60px] gap-8 flex items-center justify-end lg:px-10 px-4 duration-300 overflow-hidden">
+		<nav class="nav-wrap nav-wrap--hidden container h-[60px] lg:gap-8 gap-4 flex items-center justify-end lg:px-10 px-4 duration-300 overflow-hidden">
 			<div 
 				v-for="(item, index) in nav_list" 
 				:key="`header-${index}`"
-				class="nav-name font-bold text-[20px] tracking-wider duration-300 cursor-pointer"
-				:class="[set_nav_class(index), {'nav-name__area-white': store.area_scoped[index]}]"
+				class="nav-name font-bold lg:block hidden text-[20px] tracking-wider duration-300 cursor-pointer"
+				:class="[set_nav_class(index), {'nav-name__area-black': store.area_scoped[index]}]"
 				@click="get_element_handler(item.element)"
 				>{{ item.name }}
+			</div>
+			<div class="lg:hidden w-6 h-6 cursor-pointer">
+				<img 
+					class="w-full h-full object-contain pointer-events-none" 
+					src="/images/icon-hamburger.svg" 
+					alt="hamburger"
+				>
 			</div>
 			<TheHeaderLang />
 		</nav>
@@ -51,9 +58,9 @@
 
 	const set_nav_class = (index) => {
 		if(store.area_scoped[index]) {
-			return 'nav-name__area-white'
+			return 'nav-name__area-black';
 		}
-		return store.scrollPosition >= 50 ? 'nav-name__hover-white' : 'nav-name__hover-black'
+		return 'nav-name__hover-black';
 	}
 
 	const get_element_handler = (element) => {
@@ -84,17 +91,13 @@
 
 	watchThrottled(
 		width,
-		() => { 
-			get_area_height();
-		},
+		() => { get_area_height();},
 		{ throttle: 500 },
 	)
 
 	watchThrottled(
 		height,
-		() => { 
-			get_area_height();
-		},
+		() => { get_area_height();},
 		{ throttle: 500 },
 	)
 
@@ -124,33 +127,13 @@
 
 .the-header--scroll {
 	@apply h-[60px];
-	background-color: rgba(29, 29, 29, .7);
+	background-color: rgba(255, 255, 255, .9);
 	box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-.nav-name__hover-white {
+.nav-name__area-black {
 	position: relative;
-	color: #FFFFFF;
-	&::after {
-		content: '';
-		position: absolute;
-		bottom: -2px;
-		left: 0;
-		width: 0;
-		height: 2px;
-		background: #FFFFFF;
-		@apply duration-300;
-	}
-	&:hover {
-		&::after {
-			width: 100%;
-		}
-	}
-}
-
-.nav-name__area-white {
-	position: relative;
-	color: #FFFFFF;
+	color: #1D1D1D;
 	&::after {
 		content: '';
 		position: absolute;
@@ -158,7 +141,7 @@
 		left: 0;
 		width: 100%;
 		height: 2px;
-		background: #FFFFFF;
+		background: #1D1D1D;
 		@apply duration-300;
 	}
 }

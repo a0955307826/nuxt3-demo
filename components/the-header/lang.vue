@@ -4,7 +4,7 @@
         :key="locale.code"
         :to="switchLocalePath(locale.code)"
         class="lang font-bold tracking-wider duration-300"
-        :class="store.scrollPosition >= 50 ? 'text-white lang-white' : 'text-[#1D1D1D] lang-black'"
+        :class="{ 'text-[#1D1D1D] lang-black': store.scrollPosition >= 50 }"
         >{{locale.name}}
     </NuxtLink>
 </template>
@@ -21,25 +21,6 @@
 </script>
 
 <style lang="scss" scoped>
-.lang-white {
-    position: relative;
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: #FFFFFF;
-        @apply duration-300
-    }
-    &:hover {
-        &::after {
-            width: 100%;
-        }
-    }
-}
-
 .lang-black {
     position: relative;
     &::after {
