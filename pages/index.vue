@@ -8,6 +8,7 @@
         <Skill />
         <div class="lg:h-[45dvh] h-[35dvh]"></div>
         <Projects/>
+        <TheHeaderPopupMenu />
     </section>
 </template>
 

@@ -4,7 +4,7 @@
 		class="the-header"
 		:class="{ 'the-header--scroll': store.scrollPosition >= 50 }"
 	>
-		<nav class="nav-wrap nav-wrap--hidden container h-[60px] lg:gap-8 gap-4 flex items-center justify-end lg:px-10 px-4 duration-300 overflow-hidden">
+		<nav class="nav-wrap nav-wrap--hidden container lg:h-[60px] h-[40px] lg:gap-8 gap-4 flex items-center justify-end lg:px-10 px-4 duration-300 overflow-hidden">
 			<div 
 				v-for="(item, index) in nav_list" 
 				:key="`header-${index}`"
@@ -13,7 +13,10 @@
 				@click="get_element_handler(item.element)"
 				>{{ item.name }}
 			</div>
-			<div class="lg:hidden w-6 h-6 cursor-pointer">
+			<div 
+				class="lg:hidden w-6 h-6 cursor-pointer"
+				@click="store.is_show_popup_menu = true"
+			>
 				<img 
 					class="w-full h-full object-contain pointer-events-none" 
 					src="/images/icon-hamburger.svg" 
@@ -126,7 +129,7 @@
 }
 
 .the-header--scroll {
-	@apply h-[60px];
+	@apply lg:h-[60px] h-[40px];
 	background-color: rgba(255, 255, 255, .9);
 	box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }

@@ -4,7 +4,8 @@ export const useGlobalStore = defineStore('global', {
         scrollPosition: 0,
         getIntroHeight: 0,
         is_header_display: false,
-        area_scoped: [false, false, false, false]
+        area_scoped: [false, false, false, false],
+        is_show_popup_menu: false
     }),
     getters: {
         
