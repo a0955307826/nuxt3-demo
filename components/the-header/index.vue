@@ -25,6 +25,7 @@
 			</div>
 			<TheHeaderLang />
 		</nav>
+		<TheHeaderPopupMenu @scroll_to_area="get_element_handler"/>
 	</header>
 </template>
 
@@ -38,6 +39,7 @@
 
 	const save_area_top = ref([]);
 	const save_area_bottom = ref([]);
+
 	const nav_list = computed(() => {
 		return [
 			{ 
