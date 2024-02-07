@@ -9,7 +9,7 @@
 				<div class="relative aspect-w-16 aspect-h-12">
 					<img
 						class="w-full h-full object-cover"
-						:src="`https://picsum.photos/1920/1080?random=${index + 1}`"
+						:src="item.image"
 						alt="cover_image"
 					/>
 				</div>
@@ -19,11 +19,13 @@
 				>
 					<div class="title font-bold leading-[24px] text-[36px] pb-3">{{ item.name }}</div>
 					<div class="description font-medium text-[16px] pb-4">Lorem ipsum dolor sit amet, audire periculis efficiantur vix cu, ius dico omnesque maluisset ea. Sanctus accusata partiendo vim eu. Eu eum tation deseruisse, detraxit mediocritatem per at.</div>
-					<button 
-						class="text-[#FFFFFF] px-4 py-3 font-bold rounded-[12px]"
-						:style="{'background-color': 'rgba(29, 29, 29, .8)'}"
-						>VIEW MORE
-					</button>
+					<NuxtLink class="w-fit" :to="item.url" target="_blank">
+						<button 
+							class="text-[#FFFFFF] px-4 py-3 font-bold rounded-[12px]"
+							:style="{'background-color': 'rgba(29, 29, 29, .8)'}"
+							>VIEW MORE
+						</button>
+					</NuxtLink>
 				</div>
 			</div>
 		</div>
@@ -32,28 +34,49 @@
 
 <script setup>
 const projects_mobile = ref();
-const image_list = ref([
+const image_list = computed(() => [
 	{
-		name: 'Welend'
+		name: "Welend",
+		image: "/images/welend.png",
+		description: "",
+		url: "https://www.welend.hk/",
 	},
 	{
-		name: 'Hkadc'
+		name: "Hkadc",
+		image: "/images/hkadc.png",
+		description: "",
+		url: "https://hkadc-islandsouth.hk/",
 	},
 	{
-		name: 'Wynn'
+		name: "Medisana",
+		image: "/images/medisana.png",
+		description: "",
+		url: "https://hk.medisanaapac.com/",
 	},
 	{
-		name: 'Yidan'
+		name: "Wynn",
+		image: "/images/wynn.jpeg",
+		description: "",
+		url: "https://www.wynnresortsmacau.com/zh-hk/wynn-macau"
 	},
 	{
-		name: 'Ego'
+		name: "Yidan",
+		image: "/images/yidan.png",
+		description: "",
+		url: "https://yidanprize.org/"
 	},
 	{
-		name: 'Muster'
+		name: "Ego",
+		image: "/images/ego.png",
+		description: "https://www.ego-finance.com/",
+		url: "https://www.ego-finance.com/"
 	},
 	{
-		name: 'Centaline'
-	}
+		name: "Muster",
+		image: "/images/muster.png",
+		description: "",
+		url: "https://www.calligoapp.com/"
+	},
 ]);
 
 const initObserver = () => {

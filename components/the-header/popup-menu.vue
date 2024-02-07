@@ -47,10 +47,6 @@
 				name: t("text_project"),
 				element: 'main-project' 
 			}, 
-			{ 
-				name: 'Contact',
-				element: 'contact' 
-			}
 		]
 	})
     
