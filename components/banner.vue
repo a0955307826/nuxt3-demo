@@ -176,6 +176,7 @@ onBeforeUnmount(() => {
 	top: 50%;
 	transform: translate(-50%, -50%);
 	z-index: 10;
+	pointer-events: none;
 	text-shadow: 0px 3px 0px #F0f0f0, 0px 14px 10px rgba(0, 0, 0, 0.15),
 		0px 24px 2px rgba(0, 0, 0, 0.1), 0px 24px 30px rgba(0, 0, 0, 0.1);
 		@apply mx-auto fixed tracking-widest font-black lg:leading-[150px] ms:leading-[100px] xs:leading-[80px] leading-[60px] lg:text-[120px] ms:text-[80px] sm:text-[60px] text-[40px] whitespace-nowrap;
@@ -197,6 +198,7 @@ onBeforeUnmount(() => {
 }
 
 .hero-banner-title--move {
+	pointer-events: none;
 	text-shadow: 0px 3px 0px #F0f0f0, 0px 14px 10px rgba(0, 0, 0, 0.15),
 		0px 24px 2px rgba(0, 0, 0, 0.1), 0px 24px 32px rgba(0, 0, 0, 0.1);
 	@apply mx-auto fixed tracking-widest font-black lg:leading-[150px] ms:leading-[100px] xs:leading-[80px] leading-[60px] lg:text-[120px] ms:text-[80px] sm:text-[60px] text-[40px] whitespace-nowrap;

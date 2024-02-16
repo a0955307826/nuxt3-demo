@@ -7,20 +7,20 @@
 				>{{ t('text_skill') }}
 			</p>
 		</div>
-		<div class="grid lg:gap-5 gap-3 lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
+		<div class="skill-card">
 			<div 
 				v-for="(item, index) in skill_list" 
 				:key="`skill-${index}`"
 				class="skill-item"
 			>
-				<div class="sm:max-w-[100px] max-w-[50px] w-full sm:max-h-[100px] max-h-[50px] h-full">
+				<div class="skill-card__head">
 					<img 
-						class="w-full h-full object-contain" 
+						class="skill-image" 
 						:src="`/images/${item.img}`" 
 						:alt="item.alt"
 					>
 				</div>
-				<p class="tracking-wider font-medium">{{ item.name }}</p>
+				<p class="skill-text">{{ item.name }}</p>
 			</div>
 		</div>
 	</section>
@@ -38,7 +38,9 @@
     const { stop } = useIntersectionObserver(
 		skill,
 		([{ isIntersecting }]) => {
-			targetIsVisible.value = isIntersecting;
+			if(isIntersecting) {
+				targetIsVisible.value = true;
+			}
 		},
 		intersectionObserverOptions
 	);
@@ -97,12 +99,11 @@
 				entries.forEach((entry) => {
 					if(entry.isIntersecting) {
 						entry.target.classList.add('skill-card-animation');
-						entry.target.classList.remove('remove-skill-card-animation');
 					} 
-					else {
-						entry.target.classList.add('remove-skill-card-animation');
-						entry.target.classList.remove('skill-card-animation');
-					}
+					// else {
+					// 	entry.target.classList.add('remove-skill-card-animation');
+					// 	entry.target.classList.remove('skill-card-animation');
+					// }
 				});
 			},
 			options
@@ -118,31 +119,6 @@
 </script>
 
 <style lang="scss" scoped>
-	.skill {
-		@apply relative max-w-[1440px] mx-auto lg:px-10 px-4;
-	}
-
-	.skill-title {
-		@apply relative w-fit max-w-[1440px] mx-auto font-bold tracking-wider lg:text-[120px] sm:text-[60px] text-[48px] z-10 lg:px-0 px-4 lg:mb-0 mb-6 overflow-hidden;
-		text-shadow: 0px 3px 0px #F0f0f0, 0px 14px 10px rgba(0, 0, 0, 0.15),
-		0px 24px 2px rgba(0, 0, 0, 0.1), 0px 24px 30px rgba(0, 0, 0, 0.1);
-        p {
-            overflow: hidden;
-        }
-	}
-
-	.skill-item {
-		box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-		font-weight: bold;
-		cursor: pointer;
-		border-radius: 12px;
-		background-color: rgba(255, 255, 255, .8);
-		@apply border-[2px] border-solid border-white lg:gap-5 gap-3 flex items-center justify-center flex-col sm:py-[50px] py-[30px] sm:px-[20px] px-[10px] duration-300;
-		&:hover {
-			@apply border-[#2e2e2e] bg-white;
-		}
-	}
-
 	@keyframes project-animation {
 		0% {
 			width: 0;
@@ -183,6 +159,46 @@
 			transform: translateY(50px);
 			opacity: 0;
 		}
+	}
+
+	.skill {
+		@apply relative max-w-[1440px] mx-auto lg:px-10 px-4;
+	}
+
+	.skill-title {
+		@apply relative w-fit max-w-[1440px] mx-auto font-bold tracking-wider lg:text-[120px] sm:text-[60px] text-[48px] z-10 lg:px-0 px-4 lg:mb-0 mb-6 overflow-hidden;
+		text-shadow: 0px 3px 0px #F0f0f0, 0px 14px 10px rgba(0, 0, 0, 0.15),
+		0px 24px 2px rgba(0, 0, 0, 0.1), 0px 24px 30px rgba(0, 0, 0, 0.1);
+        p {
+            overflow: hidden;
+        }
+	}
+
+	.skill-card {
+		@apply grid lg:gap-5 gap-3 lg:grid-cols-4 md:grid-cols-3 grid-cols-2;
+		&__head {
+			@apply sm:max-w-[100px] max-w-[50px] w-full sm:max-h-[100px] max-h-[50px] h-full;
+		}
+	}
+
+	.skill-item {
+		box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+		font-weight: bold;
+		cursor: pointer;
+		border-radius: 12px;
+		background-color: rgba(255, 255, 255, .8);
+		@apply translate-x-[50px] opacity-0 border-[2px] border-solid border-white lg:gap-5 gap-3 flex items-center justify-center flex-col sm:py-[50px] py-[30px] sm:px-[20px] px-[10px] duration-300;
+		&:hover {
+			@apply border-[#2e2e2e] bg-white;
+		}
+	}
+
+	.skill-image {
+		@apply w-full h-full object-contain;
+	}
+
+	.skill-text {
+		@apply tracking-wider font-semibold;
 	}
 
 	.skill-animation {
