@@ -15,15 +15,15 @@
 					/>
 				</div>
 				<div class="content px-4 py-6">
-					<div class="title font-bold text-[32px] pb-3">
+					<div class="title font-bold text-[24px] pb-3">
 						{{ item.name }}
 					</div>
-					<div class="description font-semibold text-[16px] pb-4">
+					<div class="description font-semibold text-[12px] pb-4">
 						{{ item.description }}
 					</div>
 					<NuxtLink class="w-fit" :to="item.url" target="_blank">
 						<button
-							class="text-[#FFFFFF] px-4 py-3 font-bold rounded-[12px]"
+							class="text-[#FFFFFF] text-[12px] px-4 py-3 font-bold rounded-[12px]"
 							:style="{
 								'background-color': 'rgba(29, 29, 29, .8)',
 							}"
@@ -102,7 +102,7 @@ const initObserver = () => {
 			if (entry.isIntersecting) {
 				entry.target.classList.add("image-animation");
 				entry.target.classList.remove("remove-image-animation");
-			} 
+			}
 			// else {
 			// 	entry.target.classList.add("remove-image-animation");
 			// 	entry.target.classList.remove("image-animation");

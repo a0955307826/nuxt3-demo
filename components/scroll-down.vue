@@ -6,7 +6,7 @@
         <span class="mouse-btn">
             <span class="mouse-scroll"></span>
         </span>
-        <span>Scroll Down</span>
+        <span class="font-bold">向下捲動</span>
     </div>
 </template>
 

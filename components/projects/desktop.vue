@@ -55,7 +55,7 @@
 					</NuxtLink>
 				</div>
 				<div
-					class="relative z-10"
+					class="relative z-10 cursor-grab active:cursor-grabbing"
 					:class="
 						is_main_animation_finish
 							? 'opacity-100 translate-y-0 duration-500'
@@ -339,7 +339,7 @@ onMounted(() => {
 }
 
 .card-panel {
-	@apply lg:max-w-[480px] max-w-[200px] w-full lg:rounded-[32px] lg:mr-5 mr-4 cursor-grab active:cursor-grabbing overflow-hidden brightness-50 hover:brightness-100 duration-300;
+	@apply lg:max-w-[480px] max-w-[200px] w-full lg:rounded-[32px] lg:mr-5 mr-4 overflow-hidden brightness-50 hover:brightness-100 duration-300;
 }
 
 .btn {

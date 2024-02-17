@@ -1,114 +1,143 @@
 <template>
-	<header 
+	<header
 		v-if="store.is_header_display"
 		class="the-header"
 		:class="{ 'the-header--scroll': store.scrollPosition >= 50 }"
 	>
-		<nav class="nav-wrap nav-wrap--hidden container lg:h-[60px] h-[40px] lg:gap-8 gap-4 flex items-center justify-end lg:px-10 px-4 duration-300 overflow-hidden">
-			<div 
-				v-for="(item, index) in nav_list" 
-				:key="`header-${index}`"
-				class="nav-name font-bold lg:block hidden text-[20px] tracking-wider duration-300 cursor-pointer"
-				:class="[set_nav_class(index), {'nav-name__area-black': store.area_scoped[index]}]"
-				@click="get_element_handler(item.element)"
-				>{{ item.name }}
-			</div>
-			<div 
-				class="lg:hidden w-6 h-6 cursor-pointer"
-				@click="store.is_show_popup_menu = true"
+		<nav
+			class="nav-wrap nav-wrap--hidden container lg:h-[60px] h-[40px] flex items-center justify-between lg:px-10 px-4 duration-300 overflow-hidden"
+		>
+			<div
+				@click="scroll_top_handler"
+				class="lg:w-[40px] w-[30px] lg:h-[40px] h-[30px] cursor-pointer"
 			>
-				<img 
-					class="w-full h-full object-contain pointer-events-none" 
-					src="/images/icon-hamburger.svg" 
-					alt="hamburger"
-				>
+				<img src="/favicon.png" alt="logo" />
 			</div>
-			<TheHeaderLang />
+			<div class="flex items-center lg:gap-8 gap-4">
+				<div
+					v-for="(item, index) in nav_list"
+					:key="`header-${index}`"
+					class="nav-name font-bold lg:block hidden text-[20px] tracking-wider duration-300 cursor-pointer"
+					:class="[
+						set_nav_class(index),
+						{ 'nav-name__area-black': store.area_scoped[index] },
+					]"
+					@click="get_element_handler(item.element)"
+				>
+					{{ item.name }}
+				</div>
+				<div
+					class="lg:hidden w-6 h-6 cursor-pointer"
+					@click="store.is_show_popup_menu = true"
+				>
+					<img
+						class="w-full h-full object-contain pointer-events-none"
+						src="/images/icon-hamburger.svg"
+						alt="hamburger"
+					/>
+				</div>
+			</div>
+			<!-- <TheHeaderLang /> -->
 		</nav>
-		<TheHeaderPopupMenu @scroll_to_area="get_element_handler"/>
+		<TheHeaderPopupMenu @scroll_to_area="get_element_handler" />
 	</header>
 </template>
 
 <script setup>
-	import { useWindowSize, useWindowScroll, watchThrottled  } from "@vueuse/core";
-	import { useGlobalStore } from '~/store';
-	const { width, height } = useWindowSize();
-	const { x, y } = useWindowScroll();
-	const store = useGlobalStore();
-	const { t } = useI18n();
+import { useWindowSize, useWindowScroll, watchThrottled } from "@vueuse/core";
+import { useGlobalStore } from "~/store";
+const { width, height } = useWindowSize();
+const { x, y } = useWindowScroll();
+const store = useGlobalStore();
+const { t } = useI18n();
 
-	const save_area_top = ref([]);
-	const save_area_bottom = ref([]);
+const save_area_top = ref([]);
+const save_area_bottom = ref([]);
 
-	const nav_list = computed(() => {
-		return [
-			{ 
-				name: t('text_intro'),
-				element: 'intro'
-			}, 
-			{ 
-				name: t('text_skill'),
-				element: 'skill'
-			}, 
-			{ 
-				name: t("text_project"),
-				element: 'main-project' 
-			}, 
-		]
-	})
+const nav_list = computed(() => {
+	return [
+		{
+			name: t("text_intro"),
+			element: "intro",
+		},
+		{
+			name: t("text_skill"),
+			element: "skill",
+		},
+		{
+			name: t("text_project"),
+			element: "main-project",
+		},
+	];
+});
 
-	const set_nav_class = (index) => {
-		if(store.area_scoped[index]) {
-			return 'nav-name__area-black';
-		}
-		return 'nav-name__hover-black';
+const scroll_top_handler = () => {
+	window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+const set_nav_class = (index) => {
+	if (store.area_scoped[index]) {
+		return "nav-name__area-black";
 	}
+	return "nav-name__hover-black";
+};
 
-	const get_element_handler = (element) => {
-		let element_offsetTop = document.querySelector(`.${element}`)?.offsetTop;
-		if(element === 'intro') {
-			element_offsetTop -= width.value >= 992 ? 300 : 200;
-		} else {
-			element_offsetTop -= 100;
-		}
-		useScrollToArea(element_offsetTop);
+const get_element_handler = (element) => {
+	let element_offsetTop = document.querySelector(`.${element}`)?.offsetTop;
+	if (element === "intro") {
+		element_offsetTop -= width.value >= 992 ? 300 : 200;
+	} else {
+		element_offsetTop -= 100;
 	}
+	useScrollToArea(element_offsetTop);
+};
 
-	const get_area_height = () => {
-		save_area_top.value = [];
-		save_area_bottom.value = [];
-		for(let i = 0; i < nav_list.value.length; i++) {
-			let get_area_element = document.querySelector(`.${nav_list.value[i].element}`);
-			save_area_top.value.push(get_area_element?.offsetTop - 580);
-			save_area_bottom.value.push(get_area_element?.offsetTop + get_area_element?.offsetHeight - 200);
-		}
+const get_area_height = () => {
+	save_area_top.value = [];
+	save_area_bottom.value = [];
+	for (let i = 0; i < nav_list.value.length; i++) {
+		let get_area_element = document.querySelector(
+			`.${nav_list.value[i].element}`
+		);
+		save_area_top.value.push(get_area_element?.offsetTop - 580);
+		save_area_bottom.value.push(
+			get_area_element?.offsetTop + get_area_element?.offsetHeight - 200
+		);
 	}
+};
 
-	watch(y, (val) => {
-		for(let i = 0; i < save_area_top.value.length; i++) {
-			store.area_scoped[i] = val >= save_area_top.value[i] && val < save_area_bottom.value[i];
-		}
-	})
+watch(y, (val) => {
+	for (let i = 0; i < save_area_top.value.length; i++) {
+		store.area_scoped[i] =
+			val >= save_area_top.value[i] && val < save_area_bottom.value[i];
+	}
+});
 
-	watchThrottled(
-		width,
-		() => { get_area_height();},
-		{ throttle: 500 },
-	)
-
-	watchThrottled(
-		height,
-		() => { get_area_height();},
-		{ throttle: 500 },
-	)
-
-	onMounted(() => {
+watchThrottled(
+	width,
+	() => {
 		get_area_height();
-		if(store.is_header_display) {
-			document.querySelector('.nav-wrap')?.classList?.remove('nav-wrap--hidden');
-			document.querySelector('.nav-wrap')?.classList?.add('nav-wrap--show');
-		}
-	})
+	},
+	{ throttle: 500 }
+);
+
+watchThrottled(
+	height,
+	() => {
+		get_area_height();
+	},
+	{ throttle: 500 }
+);
+
+onMounted(() => {
+	get_area_height();
+	if (store.is_header_display) {
+		document
+			.querySelector(".nav-wrap")
+			?.classList?.remove("nav-wrap--hidden");
+		document.querySelector(".nav-wrap")?.classList?.add("nav-wrap--show");
+	}
+});
 </script>
 
 <style lang="scss" scoped>
@@ -128,30 +157,30 @@
 
 .the-header--scroll {
 	@apply lg:h-[60px] h-[40px];
-	background-color: rgba(255, 255, 255, .9);
+	background-color: rgba(255, 255, 255, 0.9);
 	box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .nav-name__area-black {
 	position: relative;
-	color: #1D1D1D;
+	color: #1d1d1d;
 	&::after {
-		content: '';
+		content: "";
 		position: absolute;
 		bottom: -2px;
 		left: 0;
 		width: 100%;
 		height: 2px;
-		background: #1D1D1D;
+		background: #1d1d1d;
 		@apply duration-300;
 	}
 }
 
 .nav-name__hover-black {
 	position: relative;
-	color: #1D1D1D;
+	color: #1d1d1d;
 	&::after {
-		content: '';
+		content: "";
 		position: absolute;
 		bottom: -2px;
 		left: 0;

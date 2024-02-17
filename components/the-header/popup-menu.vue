@@ -11,7 +11,7 @@
                 src="/images/icon-close.svg" 
                 alt="close"
             >
-            <TheHeaderLang />
+            <!-- <TheHeaderLang /> -->
         </div>
         <div class="menu-list-mobile w-full h-full flex flex-col mt-10 px-4 gap-3">
             <div 

@@ -1,5 +1,21 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+    app: {
+        head: {
+            meta: [
+                { charset: "utf-8" },
+                { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' },
+            ],
+            link: [
+                {
+                    rel: "icon",
+                    type: "image/x-icon",
+                    href: "/favicon.png",
+                },
+            ],
+            
+        },
+    },
 	devtools: { enabled: false },
 	css: [ '~/assets/scss/index.scss' ],
 	modules: [
@@ -11,7 +27,7 @@ export default defineNuxtConfig({
 		transpile: ['gsap'],
 	},
 	i18n: {
-        defaultLocale: "en",
+        defaultLocale: "zh-tw",
         strategy: "prefix_except_default",
         detectBrowserLanguage: false,
         langDir: "locales",
