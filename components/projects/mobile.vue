@@ -62,13 +62,6 @@ const image_list = computed(() => [
 		url: "https://hk.medisanaapac.com/",
 	},
 	{
-		name: "Wynn",
-		image: "/images/wynn.jpeg",
-		description:
-			"永利度假村(Wynn)以及旗下兩家頂級酒店和度假村：永利澳門和永利皇宮。永利度假村網站開發時，設計成可以自由增減及調換組件順序，給予最大的頁面彈性。",
-		url: "https://www.wynnresortsmacau.com/zh-hk/wynn-macau",
-	},
-	{
 		name: "Yidan",
 		image: "/images/yidan.png",
 		description:
